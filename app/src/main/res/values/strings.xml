@@ -32,4 +32,6 @@
     <string name="addcategory">Thêm <br /> loại</string>
     <string name="editcategory">Sửa <br /> loại</string>
     <string name="choseimg">Chọn hình</string>
+    <string name="luumatkhau">Lưu đăng nhập</string>
+    <string name="quenmatkhau">Quên mật khẩu</string>
 </resources>
