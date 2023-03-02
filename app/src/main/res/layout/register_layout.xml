@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/colorPrimary"
+    android:background="@color/purple_200"
     android:padding="30dp"
     android:transitionName="transition_signup"
     android:id="@+id/layoutRegister"
@@ -25,6 +25,18 @@
             android:padding="5dp"
             android:onClick="backFromRegister"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_drawable"
+            android:padding="25dp"
+            android:text="1/2"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,20 +52,6 @@
                 android:layout_marginTop="20dp"
                 android:transitionName="transition_title_text"
                 android:layout_centerVertical="true"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/circle_drawable"
-                android:padding="25dp"
-                android:text="1/2"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="18sp"
                 />
 
         </RelativeLayout>
