@@ -32,13 +32,13 @@ public class User {
     @ColumnInfo(name = "dob")
     public Date dob;
 
-    @ColumnInfo(name = "role_id")
-    public String role_id;
+    @ColumnInfo(name = "isAdmin")
+    public boolean isAdmin;
 
     public User() {
     }
 
-    public User(int user_id, String full_name, String username, String password, String email, String phone, Boolean gender, Date dob, String role_id) {
+    public User(int user_id, String full_name, String username, String password, String email, String phone, Boolean gender, Date dob, boolean isAdmin) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.username = username;
@@ -47,7 +47,7 @@ public class User {
         this.phone = phone;
         this.gender = gender;
         this.dob = dob;
-        this.role_id = role_id;
+        this.isAdmin = isAdmin;
     }
 
     public int getUser_id() {
@@ -114,11 +114,11 @@ public class User {
         this.dob = dob;
     }
 
-    public String getRole_id() {
-        return role_id;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
