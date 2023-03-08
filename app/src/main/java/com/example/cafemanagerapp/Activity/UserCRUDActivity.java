@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.Button;
@@ -42,6 +43,15 @@ public class UserCRUDActivity extends AppCompatActivity {
         LoadData();
     }
     private void LoadData(){
+//        User u = new User();
+//        u.setFull_name("Nguyen Huy Hoang");
+//        u.setEmail("ABC@GMAI");
+//        u.setAdmin(true);
+//        u.setGender(true);
+//        u.setPassword("123");
+//        u.setPhone("1900100co");
+//        u.setUsername("ABC");
+//        UserDatabase.getInstance(this).userDAO().insert(u);
         mListUser =  UserDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }
@@ -50,6 +60,10 @@ public class UserCRUDActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add);
     }
     private void updateUserFunction(User u){
-
+        Intent i = new Intent(UserCRUDActivity.this,UserCrudUpdateActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id",u.getUser_id());
+        i.putExtras(b);
+        startActivity(i);
     }
 }

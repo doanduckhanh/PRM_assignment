@@ -7,11 +7,12 @@ import androidx.room.TypeConverters;
 
 import com.example.cafemanagerapp.DAO.DateConverter;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity(tableName = "user")
 @TypeConverters(DateConverter.class)
-public class User {
+public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int user_id;
 
