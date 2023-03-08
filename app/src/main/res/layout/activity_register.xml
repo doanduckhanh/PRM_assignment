@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
+    tools:context=".Activity.RegisterActivity"
     android:background="@color/white"
     android:padding="30dp"
     android:transitionName="transition_signup"
@@ -25,17 +25,6 @@
             android:padding="5dp"
             android:onClick="backFromRegister"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/circle_drawable"
-            android:padding="25dp"
-            android:text="1/2"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -66,7 +55,7 @@
                 android:id="@+id/txtl_signup_HoVaTen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="FullName"
+                android:hint="Tên đầy đủ"
                 app:startIconDrawable="@drawable/ic_baseline_create_pencil"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconTint="@color/black"
@@ -88,7 +77,7 @@
                 android:id="@+id/txtl_signup_TenDN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Tên tài khoản"
                 app:startIconDrawable="@drawable/ic_baseline_person_24"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconTint="@color/black"
@@ -154,7 +143,7 @@
                 android:id="@+id/txtl_signup_MatKhau"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="Mật khẩu"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconTint="@color/black"
@@ -173,7 +162,60 @@
                     android:inputType="textPassword"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn Giới tính"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
 
+            <RadioGroup
+                android:id="@+id/rg_signup_GioiTinh"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/rd_signup_Nam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nam"
+                    android:layout_marginRight="10dp"/>
+
+                <RadioButton
+                    android:id="@+id/rd_signup_Nu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nữ"
+                    android:layout_marginRight="10dp"/>
+
+                <RadioButton
+                    android:id="@+id/rd_signup_Khac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khác" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn Ngày sinh"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+            <DatePicker
+                android:id="@+id/dt_signup_NgaySinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:spinnersShown="true"
+
+                />
         </LinearLayout>
 
         <Button
@@ -181,11 +223,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/caffe"
             android:elevation="5dp"
-            android:text="Next"
+            android:text="Đăng ký"
             android:textColor="@color/white"
-            app:backgroundTint="@color/black"
             />
     </LinearLayout>
 
