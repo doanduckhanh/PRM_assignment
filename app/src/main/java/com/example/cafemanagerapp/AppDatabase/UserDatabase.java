@@ -11,7 +11,7 @@ import com.example.cafemanagerapp.Entity.User;
 
 @Database(entities = {User.class},version = 1)
 public abstract class UserDatabase extends RoomDatabase {
-    private static final String DATABASE_NAME = "nhanvien.db";
+    private static final String DATABASE_NAME = "user.db";
     private static UserDatabase instance;
 
     public static synchronized UserDatabase getInstance(Context context){
@@ -22,5 +22,5 @@ public abstract class UserDatabase extends RoomDatabase {
         }
         return instance;
     }
-    public abstract UserDAO nhanVienDAO();
+    public abstract UserDAO userDAO();
 }
