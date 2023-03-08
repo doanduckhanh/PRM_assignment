@@ -9,6 +9,7 @@ import android.widget.Adapter;
 import android.widget.LinearLayout;
 
 import com.example.cafemanagerapp.Adapter.UserCRUDAdapter;
+import com.example.cafemanagerapp.AppDatabase.UserDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
 
@@ -34,8 +35,9 @@ public class UserCRUDActivity extends AppCompatActivity {
         LoadData();
     }
     private void LoadData(){
-        mListUser.add(new User(1, "nguyen a", "abc", "123", "abc@gmail", "19001000",true,new Date(1/1/1999), true));
-        mListUser.add(new User(2, "nguyen b", "abcd", "1234", "abcd@gmail", "19001000",false,new Date(1/1/1999), false));
+//        UserDatabase.getInstance(this).UserDAO().insert(new User(1, "nguyen a", "abc", "123", "abc@gmail", "19001000",true,new Date(1/1/1999), true));
+//        UserDatabase.getInstance(this).UserDAO().insert(new User(0, "nguyen b", "abcd", "1234", "abcd@gmail", "19001000",false,new Date(1/1/1999), false));
+        mListUser =  UserDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }
     private void initUi(){
