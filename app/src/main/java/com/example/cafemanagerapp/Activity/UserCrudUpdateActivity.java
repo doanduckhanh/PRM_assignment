@@ -42,7 +42,10 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     private RadioButton rbFeMale;
     private RadioButton rbIsAdmin;
     private RadioButton rbNotAdmin;
-    private String date="1-1-1999";
+    private String date;
+    private int defaultDay=1;
+    private int defaultMonth=1;
+    private int defaultYear=2001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +57,13 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         loadData();
 
         Calendar calendar =Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         edit_dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         UserCrudUpdateActivity.this,android.R.style.Theme_Black
-                        ,setListener,year,month,day);
+                        ,setListener,defaultYear,defaultMonth-1,defaultDay);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
             }
@@ -71,8 +71,10 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         setListener = new DatePickerDialog.OnDateSetListener(){
             @Override
             public void onDateSet(DatePicker view,int year,int month,int dayOfMonth){
-                month=month+1;
-                date =day+"/"+month+"/"+year;
+                defaultYear=year;
+                defaultMonth = month+1;
+                defaultDay =dayOfMonth;
+                date =defaultYear+"-"+defaultMonth+"-"+defaultDay;
                 edit_dob.setText(date);
             }
         };
@@ -80,11 +82,9 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User u = null;
-                try {
+
                     u = getInputUser();
-                } catch (ParseException e) {
-                    u=null;
-                }
+
                 if(u == null){
                     Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
                     return;
@@ -131,11 +131,13 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         else{
             rbNotAdmin.setChecked(true);
         }
-        java.util.Date date2 = user.getDob();
-        date2 = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = dateFormat.format(date2);
-        edit_dob.setText(strDate);
+
+        edit_dob.setText(user.getDob().toString());
+        String[] dateArray = user.getDob().toString().split("-");
+        defaultYear = Integer.parseInt(dateArray[0]);
+        defaultMonth = Integer.parseInt(dateArray[1]);
+        defaultDay = Integer.parseInt(dateArray[2]);
+
 
     }
     public void MaleClicked(View view) {
@@ -149,7 +151,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     }public void NotAdminClicked(View view) {
         rbNotAdmin.setChecked(true);
     }
-    private User getInputUser() throws ParseException {
+    private User getInputUser(){
         User u =new User();
         u.setUser_id(id);
             if(editFullName.getText().toString().isEmpty()
@@ -175,7 +177,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 u.setGender(false);
             }
 
-            Date date1=Date.valueOf("11/11/1999");
+            Date date1=Date.valueOf( edit_dob.getText().toString());
             u.setDob(date1);
             if(rbIsAdmin.isChecked()){
                 u.setAdmin(true);
