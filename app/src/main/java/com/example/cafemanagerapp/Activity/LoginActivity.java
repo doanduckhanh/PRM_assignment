@@ -1,14 +1,16 @@
-package com.example.cafemanagerapp;
+package com.example.cafemanagerapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.cafemanagerapp.R;
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_layout);
+        setContentView(R.layout.activity_login);
     }
 }
