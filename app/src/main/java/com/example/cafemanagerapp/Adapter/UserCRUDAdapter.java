@@ -15,8 +15,15 @@ import com.example.cafemanagerapp.R;
 import java.util.List;
 
 public class UserCRUDAdapter extends RecyclerView.Adapter<UserCRUDAdapter.UserCRUDViewHolder>{
+    private IClickUpdate iClickUpdate;
+    public interface IClickUpdate{
+        void updateUser(User user);
+    }
     private List<User> mListUser;
 
+    public UserCRUDAdapter(IClickUpdate iClickUpdate) {
+        this.iClickUpdate = iClickUpdate;
+    }
 
     @NonNull
     @Override
@@ -33,6 +40,12 @@ public class UserCRUDAdapter extends RecyclerView.Adapter<UserCRUDAdapter.UserCR
         }
         holder.tvId.setText(String.valueOf(user.getUser_id()));
         holder.tvFullName.setText(user.getFull_name());
+        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickUpdate.updateUser(user);
+            }
+        });
     }
 
     @Override

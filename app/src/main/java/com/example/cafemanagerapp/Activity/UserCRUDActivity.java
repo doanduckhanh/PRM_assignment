@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.cafemanagerapp.Adapter.UserCRUDAdapter;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserCRUDActivity extends AppCompatActivity {
+    private Button btnAdd;
     private List<User> mListUser;
     private UserCRUDAdapter userCRUDAdapter;
     private RecyclerView rcvUser;
@@ -28,7 +30,12 @@ public class UserCRUDActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_crudactivity);
         initUi();
         mListUser = new ArrayList<>();
-        userCRUDAdapter = new UserCRUDAdapter();
+        userCRUDAdapter = new UserCRUDAdapter(new UserCRUDAdapter.IClickUpdate() {
+            @Override
+            public void updateUser(User user) {
+                updateUserFunction(user);
+            }
+        });
         LinearLayoutManager l = new LinearLayoutManager(this);
         rcvUser.setLayoutManager(l);
         rcvUser.setAdapter(userCRUDAdapter);
@@ -40,5 +47,9 @@ public class UserCRUDActivity extends AppCompatActivity {
     }
     private void initUi(){
         rcvUser = findViewById(R.id.rcvUser);
+        btnAdd = findViewById(R.id.btn_add);
+    }
+    private void updateUserFunction(User u){
+
     }
 }
