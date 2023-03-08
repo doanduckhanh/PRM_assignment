@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.example.cafemanagerapp.DAO.UserDAO;
 import com.example.cafemanagerapp.Entity.User;
 
-@Database(entities = {User.class},version = 1)
+@Database(entities = {User.class},version = 2)
 public abstract class UserDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "user.db";
     private static UserDatabase instance;
