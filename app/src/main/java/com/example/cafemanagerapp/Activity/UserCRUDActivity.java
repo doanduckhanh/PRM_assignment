@@ -35,8 +35,6 @@ public class UserCRUDActivity extends AppCompatActivity {
         LoadData();
     }
     private void LoadData(){
-//        UserDatabase.getInstance(this).UserDAO().insert(new User(1, "nguyen a", "abc", "123", "abc@gmail", "19001000",true,new Date(1/1/1999), true));
-//        UserDatabase.getInstance(this).UserDAO().insert(new User(0, "nguyen b", "abcd", "1234", "abcd@gmail", "19001000",false,new Date(1/1/1999), false));
         mListUser =  UserDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }

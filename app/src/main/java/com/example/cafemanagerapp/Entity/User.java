@@ -3,10 +3,14 @@ package com.example.cafemanagerapp.Entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.cafemanagerapp.DAO.DateConverter;
 
 import java.sql.Date;
 
 @Entity(tableName = "user")
+@TypeConverters(DateConverter.class)
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int user_id;
@@ -28,8 +32,7 @@ public class User {
 
     @ColumnInfo(name = "gender")
     public Boolean gender;
-
-    @ColumnInfo(name = "dob")
+@ColumnInfo(name = "dob")
     public Date dob;
 
     @ColumnInfo(name = "isAdmin")
