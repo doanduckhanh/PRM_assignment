@@ -9,21 +9,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cafemanagerapp.AppDatabase.UserDatabase;
+import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class UserCrudUpdateActivity extends AppCompatActivity {
@@ -52,7 +48,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_crud_update);
 
         id = getIntent().getExtras().getInt("id");
-        user = UserDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
+        user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
         initUI();
         loadData();
 
@@ -91,7 +87,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
-                    UserDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
+                    AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
                     Intent i = new Intent(UserCrudUpdateActivity.this,UserCRUDActivity.class);
                     startActivity(i);
                 }

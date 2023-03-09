@@ -6,16 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.example.cafemanagerapp.Adapter.UserCRUDAdapter;
-import com.example.cafemanagerapp.AppDatabase.UserDatabase;
+import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class UserCRUDActivity extends AppCompatActivity {
 //        u.setPhone("1900100co");
 //        u.setUsername("ABC");
 //        UserDatabase.getInstance(this).userDAO().insert(u);
-        mListUser =  UserDatabase.getInstance(this).userDAO().getAll();
+        mListUser =  AppDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }
     private void initUi(){

@@ -12,6 +12,9 @@ public class Category {
     @ColumnInfo(name = "KindName")
     String KindName;
 
+    public Category() {
+    }
+
     public Category(int id, String kindName) {
         this.id = id;
         KindName = kindName;
