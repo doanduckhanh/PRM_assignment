@@ -24,12 +24,10 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM User WHERE TENDN = (:TENDN) AND MATKHAU = (:MATKHAU)")
-    int KiemTraDN(String TENDN, String MATKHAU);
+    @Query("SELECT * FROM User WHERE username = (:username) AND password = (:password)")
+    int KiemTraDN(String username, String password);
 
-    @Query("SELECT * FROM User WHERE MANV=(:MANV)")
-    User LayNVTheoMa(int MANV);
+    @Query("SELECT * FROM User WHERE user_id=(:user_id)")
+    User LayNVTheoMa(int user_id);
 
-    @Query("SELECT MAQUYEN FROM User WHERE MANV=(:MANV)")
-    int LayQuyenNV(int MANV);
 }

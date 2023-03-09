@@ -3,7 +3,7 @@
     <string name="brand_name">Quản lý Coffee Shop </string>
     <string name="slogan">Thơm ngon đến từng giọt cuối cùng</string>
     <string name="login">Đăng nhập</string>
-    <string name="logintittle">Đăng <br /> nhập</string>
+    <string name="logintittle">Đăng nhập</string>
     <string name="register">Đăng ký</string>
     <string name="function">Quản lý</string>
     <string name="howwork">Hướng dẫn sử dụng</string>
