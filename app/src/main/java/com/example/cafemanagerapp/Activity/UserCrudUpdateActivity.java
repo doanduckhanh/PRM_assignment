@@ -62,7 +62,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        UserCrudUpdateActivity.this,android.R.style.Theme_Black
+                        UserCrudUpdateActivity.this,android.R.style.Theme_Holo_Dialog
                         ,setListener,defaultYear,defaultMonth-1,defaultDay);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();

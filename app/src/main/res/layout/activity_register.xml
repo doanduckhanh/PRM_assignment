@@ -16,34 +16,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-
-        <ImageView
-            android:id="@+id/img_signup_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:padding="5dp"
-            android:onClick="backFromRegister"
-            />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/txt_signup_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="Tạo tài khoản"
                 android:textColor="@color/black"
                 android:textSize="34sp"
                 android:textAllCaps="true"
-                android:layout_marginTop="20dp"
                 android:transitionName="transition_title_text"
                 android:layout_centerVertical="true"
                 />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,45 +161,38 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 />
-
-            <RadioGroup
-                android:id="@+id/rg_signup_GioiTinh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                >
-
-                <RadioButton
-                    android:id="@+id/rd_signup_Nam"
-                    android:layout_width="wrap_content"
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/rb_signup_Nam"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="Nam"
-                    android:layout_marginRight="10dp"/>
-
-                <RadioButton
-                    android:id="@+id/rd_signup_Nu"
-                    android:layout_width="wrap_content"
+                    android:onClick="rb_male"/>
+                <RadioButton android:id="@+id/rb_signup_Nu"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="Nữ"
-                    android:layout_marginRight="10dp"/>
+                    android:onClick="rb_female"/>
             </RadioGroup>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chọn Ngày sinh"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 />
-            <DatePicker
-                android:id="@+id/dt_signup_NgaySinh"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:datePickerMode="spinner"
-                android:calendarViewShown="false"
-                android:spinnersShown="true"
-
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:hint="YYYY-MM-DD"
+                android:id="@+id/edit_signup_dob"
+                android:textColor="@color/black"
+                android:textSize="14sp"
                 />
         </LinearLayout>
 
@@ -221,6 +205,16 @@
             android:elevation="5dp"
             android:text="Đăng ký"
             android:textColor="@color/white"
+            />
+
+        <Button
+            android:id="@+id/backtologin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="Đăng nhập"
+            android:textColor="@color/black"
+            android:onClick="backFromRegister"
             />
     </LinearLayout>
 
