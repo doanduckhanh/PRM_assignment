@@ -5,14 +5,14 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class FoodKind {
+public class Category {
     @PrimaryKey
     int id;
 
     @ColumnInfo(name = "KindName")
     String KindName;
 
-    public FoodKind(int id, String kindName) {
+    public Category(int id, String kindName) {
         this.id = id;
         KindName = kindName;
     }
