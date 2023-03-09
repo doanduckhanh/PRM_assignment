@@ -30,4 +30,7 @@ public interface UserDAO {
     @Query("SELECT * FROM User WHERE user_id=(:user_id)")
     User LayNVTheoMa(int user_id);
 
+    @Query("SELECT COUNT(*) FROM User")
+    int getUserCount();
+
 }

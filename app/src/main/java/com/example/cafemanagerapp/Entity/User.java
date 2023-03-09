@@ -33,7 +33,7 @@ public class User {
     public Date dob;
 
     @ColumnInfo(name = "isAdmin")
-    public boolean isAdmin;
+    public Boolean isAdmin;
 
     public User() {
     }

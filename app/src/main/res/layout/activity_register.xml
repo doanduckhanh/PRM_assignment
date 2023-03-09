@@ -192,12 +192,6 @@
                     android:layout_height="wrap_content"
                     android:text="Nữ"
                     android:layout_marginRight="10dp"/>
-
-                <RadioButton
-                    android:id="@+id/rd_signup_Khac"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Khác" />
             </RadioGroup>
 
             <TextView
@@ -219,7 +213,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_signup_next"
+            android:id="@+id/btn_signupsubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
