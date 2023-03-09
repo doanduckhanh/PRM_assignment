@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.cafemanagerapp.Adapter.UserCRUDAdapter;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserCRUDActivity extends AppCompatActivity {
+    private Button btnAdd;
     private List<User> mListUser;
     private UserCRUDAdapter userCRUDAdapter;
     private RecyclerView rcvUser;
@@ -28,19 +31,39 @@ public class UserCRUDActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_crudactivity);
         initUi();
         mListUser = new ArrayList<>();
-        userCRUDAdapter = new UserCRUDAdapter();
+        userCRUDAdapter = new UserCRUDAdapter(new UserCRUDAdapter.IClickUpdate() {
+            @Override
+            public void updateUser(User user) {
+                updateUserFunction(user);
+            }
+        });
         LinearLayoutManager l = new LinearLayoutManager(this);
         rcvUser.setLayoutManager(l);
         rcvUser.setAdapter(userCRUDAdapter);
         LoadData();
     }
     private void LoadData(){
-//        UserDatabase.getInstance(this).UserDAO().insert(new User(1, "nguyen a", "abc", "123", "abc@gmail", "19001000",true,new Date(1/1/1999), true));
-//        UserDatabase.getInstance(this).UserDAO().insert(new User(0, "nguyen b", "abcd", "1234", "abcd@gmail", "19001000",false,new Date(1/1/1999), false));
+//        User u = new User();
+//        u.setFull_name("Nguyen Huy Hoang");
+//        u.setEmail("ABC@GMAI");
+//        u.setAdmin(true);
+//        u.setGender(true);
+//        u.setPassword("123");
+//        u.setPhone("1900100co");
+//        u.setUsername("ABC");
+//        UserDatabase.getInstance(this).userDAO().insert(u);
         mListUser =  UserDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }
     private void initUi(){
         rcvUser = findViewById(R.id.rcvUser);
+        btnAdd = findViewById(R.id.btn_add);
+    }
+    private void updateUserFunction(User u){
+        Intent i = new Intent(UserCRUDActivity.this,UserCrudUpdateActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id",u.getUser_id());
+        i.putExtras(b);
+        startActivity(i);
     }
 }
