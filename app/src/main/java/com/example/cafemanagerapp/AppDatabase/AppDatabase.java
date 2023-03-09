@@ -7,7 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.cafemanagerapp.DAO.CategoryDAO;
-import com.example.cafemanagerapp.DAO.FoodDAO;
 import com.example.cafemanagerapp.DAO.TableDAO;
 import com.example.cafemanagerapp.DAO.UserDAO;
 import com.example.cafemanagerapp.Entity.Category;
@@ -30,6 +29,5 @@ public abstract class AppDatabase extends RoomDatabase {
     }
     public abstract UserDAO userDAO();
     public abstract CategoryDAO categoryDAO();
-    public abstract FoodDAO foodDAO();
     public abstract TableDAO tableDAO();
 }
