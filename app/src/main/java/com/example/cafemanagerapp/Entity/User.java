@@ -42,7 +42,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int user_id, String full_name, String username, String password, String email, String phone, Boolean gender, Date dob, boolean isAdmin) {
+    public User(int user_id, String full_name, String username, String password, String email, String phone, Boolean gender, Date dob, Boolean isAdmin) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.username = username;
@@ -118,11 +118,11 @@ public class User implements Serializable {
         this.dob = dob;
     }
 
-    public boolean isAdmin() {
+    public Boolean getAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(Boolean admin) {
         isAdmin = admin;
     }
 }

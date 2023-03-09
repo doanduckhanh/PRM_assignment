@@ -145,4 +145,17 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void backLoginFromRegister(View view){
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(findViewById(R.id.layoutRegister),"transition_signup");
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RegisterActivity.this,pairs);
+            startActivity(intent,options.toBundle());
+        }else {
+            startActivity(intent);
+        }
+    }
 }

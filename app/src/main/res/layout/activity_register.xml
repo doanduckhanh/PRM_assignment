@@ -214,7 +214,7 @@
             android:backgroundTint="@color/white"
             android:text="Đăng nhập"
             android:textColor="@color/black"
-            android:onClick="backFromRegister"
+            android:onClick="backLoginFromRegister"
             />
     </LinearLayout>
 

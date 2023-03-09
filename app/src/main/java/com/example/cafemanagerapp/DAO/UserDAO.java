@@ -24,13 +24,13 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM User WHERE username = (:username) AND password = (:password)")
-    int KiemTraDN(String username, String password);
-
     @Query("SELECT * FROM User WHERE user_id=(:user_id)")
     User LayNVTheoMa(int user_id);
 
     @Query("SELECT COUNT(*) FROM User")
     int getUserCount();
+
+    @Query("SELECT * FROM user WHERE username = :username AND password = :password")
+    User getUserLogin(String username, String password);
 
 }

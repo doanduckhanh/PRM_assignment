@@ -125,7 +125,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         }else{
             rbFeMale.setChecked(true);
         }
-        if(user.isAdmin()){
+        if(user.isAdmin){
             rbIsAdmin.setChecked(true);
         }
         else{
