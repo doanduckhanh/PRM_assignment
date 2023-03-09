@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cafemanagerapp.AppDatabase.UserDatabase;
+import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(RegisterActivity.this,"Register Account Successfully!", Toast.LENGTH_SHORT).show();
-                    UserDatabase.getInstance(RegisterActivity.this).userDAO().insert(user);
+                    AppDatabase.getInstance(RegisterActivity.this).userDAO().insert(user);
                     Intent intent = new Intent(RegisterActivity.this, UserCRUDActivity.class);
                     startActivity(intent);
                 }
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
         Date dob = Date.valueOf(edt_dob.getText().toString());
         user.setDob(dob);
 
-        int userCount = UserDatabase.getInstance(RegisterActivity.this).userDAO().getUserCount();
+        int userCount = AppDatabase.getInstance(RegisterActivity.this).userDAO().getUserCount();
         if(userCount == 0 ){
             user.setAdmin(true);
         }else {
