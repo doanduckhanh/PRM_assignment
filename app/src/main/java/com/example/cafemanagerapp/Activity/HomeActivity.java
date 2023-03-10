@@ -62,6 +62,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         txt_menu_username.setText("Xin chào " + username + "!");
+
+
+        // Todo: set fragment home is default
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction tranDisplayHome = fragmentManager.beginTransaction();
+        DisplayHomeFragment displayHomeFragment = new DisplayHomeFragment();
+        tranDisplayHome.replace(R.id.contentView, displayHomeFragment);
+        tranDisplayHome.commit();
+        navigationView.setCheckedItem(R.id.nav_home);
     }
 
     @Override
