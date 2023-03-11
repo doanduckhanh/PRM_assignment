@@ -32,5 +32,7 @@ public interface UserDAO {
 
     @Query("SELECT * FROM user WHERE username = :username AND password = :password")
     User getUserLogin(String username, String password);
+    @Query("Select * from user WHERE isAdmin = 1")
+    List<User> getAllAdmin();
 
 }

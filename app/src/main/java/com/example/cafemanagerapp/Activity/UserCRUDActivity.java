@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.cafemanagerapp.Adapter.UserCRUDAdapter;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
@@ -39,6 +42,11 @@ public class UserCRUDActivity extends AppCompatActivity {
             public void detailUser(User user) {
                 detailUserFunction(user);
             }
+        }, new UserCRUDAdapter.IClickDelete() {
+            @Override
+            public void deleteUser(User user) {
+                deleteUserFunction(user);
+            }
         });
         LinearLayoutManager l = new LinearLayoutManager(this);
         rcvUser.setLayoutManager(l);
@@ -49,7 +57,7 @@ public class UserCRUDActivity extends AppCompatActivity {
 //        User u = new User();
 //        u.setFull_name("Nguyen Huy Hoang");
 //        u.setEmail("ABC@GMAI");
-//        u.setAdmin(true);
+//        u.setAdmin(false);
 //        u.setGender(true);
 //        u.setPassword("123");
 //        u.setPhone("1900100co");
@@ -79,4 +87,24 @@ public class UserCRUDActivity extends AppCompatActivity {
         i.putExtras(b);
         startActivity(i);
     }
+    private void deleteUserFunction(User u){
+        List<User> allAdmins = AppDatabase.getInstance(this).userDAO().getAllAdmin();
+        if(allAdmins.size() <= 1 && u.isAdmin == true){
+                        Toast.makeText(UserCRUDActivity.this, "Can not delete the last admin!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        new AlertDialog.Builder(this).setTitle("Confirm delete")
+                                .setMessage("Are you sure?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        AppDatabase.getInstance(UserCRUDActivity.this).userDAO().delete(u);
+                                        Toast.makeText(UserCRUDActivity.this, "User deleted!!", Toast.LENGTH_SHORT).show();
+                                        LoadData();
+                                    }
+                                })
+                                .setNegativeButton("No",null)
+                                .show();
+    }
+        LoadData();}
 }

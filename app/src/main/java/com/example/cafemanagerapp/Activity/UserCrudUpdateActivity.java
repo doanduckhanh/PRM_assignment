@@ -2,7 +2,9 @@ package com.example.cafemanagerapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +23,7 @@ import com.example.cafemanagerapp.R;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 
 public class UserCrudUpdateActivity extends AppCompatActivity {
     private TextView edit_dob;
@@ -50,10 +53,42 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
 
         id = getIntent().getExtras().getInt("id");
         function = getIntent().getExtras().getInt("function");
-        user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
-        initUI();
-        loadData();
 
+        if(function ==1){
+            user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
+            initUI();
+            setCalendar();
+            loadData();
+            btnUpdate.setText("Go back");
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserCrudUpdateActivity.super.onBackPressed();
+                }
+            });
+        } else if (function == 2) {
+            user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
+            initUI();
+            setCalendar();
+            loadData();
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    User u = null;
+                    u = getInputUser();
+                    if(u == null){
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
+                        UserCrudUpdateActivity.super.onBackPressed();
+                    }
+                }
+            });
+        }
+    }
+    private void setCalendar(){
         Calendar calendar =Calendar.getInstance();
         edit_dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,37 +110,6 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 edit_dob.setText(date);
             }
         };
-        if(function==2){
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    User u = null;
-
-                    u = getInputUser();
-
-                    if(u == null){
-                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    else{
-                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
-                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
-                        Intent i = new Intent(UserCrudUpdateActivity.this,UserCRUDActivity.class);
-                        startActivity(i);
-                    }
-                }
-            });
-        }
-        if(function ==1){
-            btnUpdate.setText("Go back");
-            btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserCrudUpdateActivity.super.onBackPressed();
-                }
-            });
-        }
-
     }
     private void initUI(){
         tvId= findViewById(R.id.tv_id);
@@ -145,8 +149,6 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         defaultYear = Integer.parseInt(dateArray[0]);
         defaultMonth = Integer.parseInt(dateArray[1]);
         defaultDay = Integer.parseInt(dateArray[2]);
-
-
     }
     public void MaleClicked(View view) {
         rbMale.setChecked(true);
