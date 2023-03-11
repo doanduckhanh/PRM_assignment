@@ -71,6 +71,34 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
             initUI();
             setCalendar();
             loadData();
+            List<User> allAdmins = AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().getAllAdmin();
+            int size = allAdmins.size();
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    User u = null;
+                    u = getInputUser();
+                    if(size <= 1 && user.isAdmin == true && u.isAdmin ==false){
+                        rbIsAdmin.setChecked(true);
+                        Toast.makeText(UserCrudUpdateActivity.this, "You are the last admin!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if(u == null){
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
+                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
+                        UserCrudUpdateActivity.super.onBackPressed();
+                    }
+                }
+            });
+        } else if (function == 0) {
+            initUI();
+            setCalendar();
+            btnUpdate.setText("Add new");
             btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,7 +109,8 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                         return;
                     }
                     else{
-                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
+                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().insert(u);
+                        Toast.makeText(UserCrudUpdateActivity.this, "User added!", Toast.LENGTH_SHORT).show();
                         UserCrudUpdateActivity.super.onBackPressed();
                     }
                 }
@@ -163,7 +192,9 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     }
     private User getInputUser(){
         User u =new User();
-        u.setUser_id(id);
+        if(id != 0){
+            u.setUser_id(id);
+        }
             if(editFullName.getText().toString().isEmpty()
             ||editUserName.getText().toString().isEmpty()
             ||editPassword.getText().toString().isEmpty()

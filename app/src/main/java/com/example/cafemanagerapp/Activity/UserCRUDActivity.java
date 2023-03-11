@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -51,6 +52,22 @@ public class UserCRUDActivity extends AppCompatActivity {
         LinearLayoutManager l = new LinearLayoutManager(this);
         rcvUser.setLayoutManager(l);
         rcvUser.setAdapter(userCRUDAdapter);
+        LoadData();
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(UserCRUDActivity.this,UserCrudUpdateActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("id",0);
+                b.putInt("function",0);
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
         LoadData();
     }
     private void LoadData(){
