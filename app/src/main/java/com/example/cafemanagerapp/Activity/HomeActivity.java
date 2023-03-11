@@ -1,5 +1,6 @@
 package com.example.cafemanagerapp.Activity;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     TextView txt_menu_username;
     SharedPreferences sharedPreferences;
     Boolean isAdmin;
+
+    int uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +68,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         txt_menu_username.setText("Xin chào " + username + "!");
-        sharedPreferences = getSharedPreferences("role", Context.MODE_PRIVATE);
-        isAdmin = sharedPreferences.getBoolean("isAdmin", false);
-
+        sharedPreferences = getSharedPreferences("save role", Context.MODE_PRIVATE);
+        isAdmin = sharedPreferences.getBoolean("role", false);
 
         // Todo: set fragment home is default
         fragmentManager = getSupportFragmentManager();
@@ -115,7 +117,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                tranDisplayMenu.commit();
 //                navigationView.setCheckedItem(item.getItemId());
 //                drawerLayout.closeDrawers();
-////
                  break;
 
             case R.id.nav_staff:
@@ -126,7 +127,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                    tranDisplayStaff.commit();
 //                    navigationView.setCheckedItem(item.getItemId());
 //                    drawerLayout.closeDrawers();
-                    Toast.makeText(getApplicationContext(),"Bạn có quyền truy cập",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, UserCRUDActivity.class);
+                    startActivity(intent);
+
                 }else {
                     Toast.makeText(getApplicationContext(),"Bạn không có quyền truy cập",Toast.LENGTH_SHORT).show();
                 }
