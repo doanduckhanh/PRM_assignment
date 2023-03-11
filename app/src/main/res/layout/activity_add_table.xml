@@ -9,11 +9,32 @@
     android:orientation="vertical"
     android:padding="10dp">
 <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/txtl_addtable_tablename"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-    android:hint="Input table name"
+    android:hint="Input tableSeat name"
+    app:hintTextColor="@color/black"
+    app:boxStrokeColor="@color/black"
+    app:boxStrokeWidthFocused="2dp"
+    app:endIconTint="@color/black"
+    app:endIconMode="clear_text"
     >
-
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:fontFamily="@font/muli"
+        android:inputType="text"
+        />
+    <Button
+        android:id="@+id/btn_addtable_AddTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Tạo bàn"
+        android:textColor="@color/black"
+        app:backgroundTint="#FECE2F" />
 </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
