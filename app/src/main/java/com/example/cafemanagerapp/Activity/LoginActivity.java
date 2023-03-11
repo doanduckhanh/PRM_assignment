@@ -48,10 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("role", user.getAdmin());
                     editor.commit();
 
-//                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-//                    intent.putExtra("username", user.getUsername());
-//                    intent.putExtra("user_id", user.getUser_id());
-//                    startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.putExtra("username", user.getUsername());
+                    intent.putExtra("user_id", user.getUser_id());
+                    startActivity(intent);
                 }else {
                     Toast.makeText(LoginActivity.this, "Login Fail!", Toast.LENGTH_SHORT).show();
                 }

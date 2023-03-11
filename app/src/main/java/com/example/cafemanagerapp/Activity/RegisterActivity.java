@@ -19,9 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
+import com.example.cafemanagerapp.R.*;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout edtFullname;
@@ -78,6 +80,9 @@ public class RegisterActivity extends AppCompatActivity {
         ((Button)btn_signupsubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassWord()){
+                    return;
+                }
                 User user = getInputRegister();
                 if(user== null){
                     Toast.makeText(RegisterActivity.this,"Register Account Fail", Toast.LENGTH_SHORT).show();
@@ -86,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(RegisterActivity.this,"Register Account Successfully!", Toast.LENGTH_SHORT).show();
                     AppDatabase.getInstance(RegisterActivity.this).userDAO().insert(user);
-                    Intent intent = new Intent(RegisterActivity.this, UserCRUDActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             }
@@ -133,19 +138,6 @@ public class RegisterActivity extends AppCompatActivity {
         rbFeMale.setChecked(true);
     }
 
-    public void backFromRegister(View view){
-        Intent intent = new Intent(getApplicationContext(),WellcomeActivity.class);
-        Pair[] pairs = new Pair[1];
-        pairs[0] = new Pair<View, String>(findViewById(R.id.layoutRegister),"transition_signup");
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RegisterActivity.this,pairs);
-            startActivity(intent,options.toBundle());
-        }else {
-            startActivity(intent);
-        }
-    }
-
     public void backLoginFromRegister(View view){
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
         Pair[] pairs = new Pair[1];
@@ -158,4 +150,98 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[@#$%^&+=])" +     // at least 1 special character
+                    "(?=\\S+$)" +            // no white spaces
+                    ".{6,}" +                // at least 4 characters
+                    "$");
+
+    private boolean validateFullName(){
+        String val = edtFullname.getEditText().getText().toString().trim();
+
+        if(val.isEmpty()){
+            edtFullname.setError(getResources().getString(string.not_empty));
+            return false;
+        }else {
+            edtFullname.setError(null);
+            edtFullname.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private boolean validateUserName(){
+        String val = edtUsername.getEditText().getText().toString().trim();
+        String checkspaces = "\\A\\w{1,50}\\z";
+
+        if(val.isEmpty()){
+            edtUsername.setError(getResources().getString(string.not_empty));
+            return false;
+        }else if(val.length()>50){
+            edtUsername.setError("Phải nhỏ hơn 50 ký tự");
+            return false;
+        }else if(!val.matches(checkspaces)){
+            edtUsername.setError("Không được cách chữ!");
+            return false;
+        }
+        else {
+            edtUsername.setError(null);
+            edtUsername.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateEmail(){
+        String val = edtEmail.getEditText().getText().toString().trim();
+        String checkspaces = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
+
+        if(val.isEmpty()){
+            edtEmail.setError(getResources().getString(string.not_empty));
+            return false;
+        }else if(!val.matches(checkspaces)){
+            edtEmail.setError("Email không hợp lệ!");
+            return false;
+        }
+        else {
+            edtEmail.setError(null);
+            edtEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePhone(){
+        String val = edtPhone.getEditText().getText().toString().trim();
+
+
+        if(val.isEmpty()){
+            edtPhone.setError(getResources().getString(string.not_empty));
+            return false;
+        }else if(val.length() != 10){
+            edtPhone.setError("Số điện thoại không hợp lệ!");
+            return false;
+        }
+        else {
+            edtPhone.setError(null);
+            edtPhone.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassWord(){
+        String val = edtPassword.getEditText().getText().toString().trim();
+
+        if(val.isEmpty()){
+            edtPassword.setError(getResources().getString(string.not_empty));
+            return false;
+        }else if(!PASSWORD_PATTERN.matcher(val).matches()){
+            edtPassword.setError("Mật khẩu ít nhất 6 ký tự!");
+            return false;
+        }
+        else {
+            edtPassword.setError(null);
+            edtPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
 }

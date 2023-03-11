@@ -21,7 +21,6 @@
     <string name="edit_failed">Lỗi khi sửa!</string>
     <string name="delete_sucessful">Xóa thành công!</string>
     <string name="delete_failed">Lỗi khi xóa!</string>
-    <string name="not_empty">Không được để trống!</string>
     <string name="opentoggle">Mở</string>
     <string name="closetoggle">Đóng</string>
     <string name="addTable">Thêm bàn ăn</string>
@@ -34,4 +33,7 @@
     <string name="choseimg">Chọn hình</string>
     <string name="luumatkhau">Lưu đăng nhập</string>
     <string name="quenmatkhau">Quên mật khẩu</string>
+    <string name="not_empty">Cant empty!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

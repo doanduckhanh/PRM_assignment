@@ -6,76 +6,76 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Food {
-    @PrimaryKey
-    int Id;
-    @ColumnInfo(name = "FoodName")
-    String FoodName;
-    @ColumnInfo(name = "Price")
-    String Price;
-    @ColumnInfo(name = "Status")
-    String Status;
-    @ColumnInfo(name = "Image")
-    byte[] Image;
-    @ColumnInfo(name = "KindId")
-    int KindId;
+    @PrimaryKey(autoGenerate = true)
+    public int food_id;
+    @ColumnInfo(name = "food_name")
+    public String food_name;
+    @ColumnInfo(name = "price")
+    public String price;
+    @ColumnInfo(name = "status")
+    public String status;
+    @ColumnInfo(name = "image")
+    public byte[] image;
+    @ColumnInfo(name = "category_id")
+    public int category_id;
 
     public Food() {
     }
 
-    public Food(int id, String foodName, String price, String status, byte[] image, int kindId) {
-        Id = id;
-        FoodName = foodName;
-        Price = price;
-        Status = status;
-        Image = image;
-        KindId = kindId;
+    public Food(int food_id, String food_name, String price, String status, byte[] image, int category_id) {
+        this.food_id = food_id;
+        this.food_name = food_name;
+        this.price = price;
+        this.status = status;
+        this.image = image;
+        this.category_id = category_id;
     }
 
-    public int getId() {
-        return Id;
+    public int getFood_id() {
+        return food_id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setFood_id(int food_id) {
+        this.food_id = food_id;
     }
 
-    public String getFoodName() {
-        return FoodName;
+    public String getFood_name() {
+        return food_name;
     }
 
-    public void setFoodName(String foodName) {
-        FoodName = foodName;
+    public void setFood_name(String food_name) {
+        this.food_name = food_name;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public byte[] getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(byte[] image) {
-        Image = image;
+        this.image = image;
     }
 
-    public int getKindId() {
-        return KindId;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setKindId(int kindId) {
-        KindId = kindId;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 }
