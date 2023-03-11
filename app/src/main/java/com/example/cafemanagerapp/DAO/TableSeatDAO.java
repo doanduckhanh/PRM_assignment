@@ -15,7 +15,7 @@ public interface TableSeatDAO {
     @Query("SELECT * FROM table_seat")
      List<TableSeat> getAll();
     @Insert
-     boolean insert(TableSeat tableSeat);
+     void insert(TableSeat tableSeat);
 
     @Update
      void update(TableSeat tableSeat);

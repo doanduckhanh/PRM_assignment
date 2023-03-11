@@ -24,6 +24,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.cafemanagerapp.Activity.AddTableActivity;
+import com.example.cafemanagerapp.Activity.EditTableActivity;
+import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Adapter.AdapterDisplayTable;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.TableSeatDAO;
@@ -79,7 +81,7 @@ public class TableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.display_table_layout,container,false);
         setHasOptionsMenu(true);
-//        ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Table Manager");
+        ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Table Manager");
 
         GVDisplayTable = (GridView)view.findViewById(R.id.gv_tablelist);
 
@@ -93,7 +95,7 @@ public class TableFragment extends Fragment {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-//        getActivity().getMenuInflater().inflate(R.menu.edit_context_menu,menu);
+       getActivity().getMenuInflater().inflate(R.menu.edit_context_menu,menu);
     }
 
     //Xử lí cho từng trường hợp trong contextmenu
@@ -102,22 +104,18 @@ public class TableFragment extends Fragment {
         int id = item.getItemId();
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int vitri = menuInfo.position;
-        int maban = banAnDTOList.get(vitri).getMaBan();
+        TableSeat tableSeat = tableList.get(vitri);
         switch(id){
             case R.id.itEdit:
                 Intent intent = new Intent(getActivity(), EditTableActivity.class);
-                intent.putExtra("maban",maban);
+                intent.putExtra("maban",tableSeat.getTable_id());
                 resultLauncherEdit.launch(intent);
                 break;
 
             case R.id.itDelete:
-                boolean ktraxoa = banAnDAO.XoaBanTheoMa(maban);
-                if(ktraxoa){
-                    HienThiDSBan();
-                    Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.delete_sucessful),Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.delete_failed),Toast.LENGTH_SHORT).show();
-                }
+                AppDatabase.getInstance(getContext()).tableDAO().delete(tableSeat);
+                HienThiDSBan();
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.delete_sucessful),Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onContextItemSelected(item);

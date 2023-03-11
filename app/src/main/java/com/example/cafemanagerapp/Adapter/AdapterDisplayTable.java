@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.OrderDAO;
 import com.example.cafemanagerapp.DAO.TableSeatDAO;
@@ -130,42 +131,42 @@ public class AdapterDisplayTable extends BaseAdapter implements View.OnClickList
                 break;
 
             case R.id.img_customtable_AddFood:
-                Intent getIHome = ((HomeActivity)context).getIntent();
-                int manv = getIHome.getIntExtra("manv",0);
-                String tinhtrang = banAnDAO.LayTinhTrangBanTheoMa(maban);
-
-                if(tinhtrang.equals("false")){
-                    //Thêm bảng gọi món và update tình trạng bàn
-                    DonDatDTO donDatDTO = new DonDatDTO();
-                    donDatDTO.setMaBan(maban);
-                    donDatDTO.setMaNV(manv);
-                    donDatDTO.setNgayDat(ngaydat);
-                    donDatDTO.setTinhTrang("false");
-                    donDatDTO.setTongTien("0");
-
-                    long ktra = donDatDAO.ThemDonDat(donDatDTO);
-                    banAnDAO.CapNhatTinhTrangBan(maban,"true");
-                    if(ktra == 0){ Toast.makeText(context,context.getResources().getString(R.string.add_failed),Toast.LENGTH_SHORT).show(); }
-                }
-                //chuyển qua trang category
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                DisplayCategoryFragment displayCategoryFragment = new DisplayCategoryFragment();
-
-                Bundle bDataCategory = new Bundle();
-                bDataCategory.putInt("maban",maban);
-                displayCategoryFragment.setArguments(bDataCategory);
-
-                transaction.replace(R.id.contentView,displayCategoryFragment).addToBackStack("hienthibanan");
-                transaction.commit();
+//                Intent getIHome = ((HomeActivity)context).getIntent();
+//                int manv = getIHome.getIntExtra("manv",0);
+//                String tinhtrang = banAnDAO.LayTinhTrangBanTheoMa(maban);
+//
+//                if(tinhtrang.equals("false")){
+//                    //Thêm bảng gọi món và update tình trạng bàn
+//                    DonDatDTO donDatDTO = new DonDatDTO();
+//                    donDatDTO.setMaBan(maban);
+//                    donDatDTO.setMaNV(manv);
+//                    donDatDTO.setNgayDat(ngaydat);
+//                    donDatDTO.setTinhTrang("false");
+//                    donDatDTO.setTongTien("0");
+//
+//                    long ktra = donDatDAO.ThemDonDat(donDatDTO);
+//                    banAnDAO.CapNhatTinhTrangBan(maban,"true");
+//                    if(ktra == 0){ Toast.makeText(context,context.getResources().getString(R.string.add_failed),Toast.LENGTH_SHORT).show(); }
+//                }
+//                //chuyển qua trang category
+//                FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                DisplayCategoryFragment displayCategoryFragment = new DisplayCategoryFragment();
+//
+//                Bundle bDataCategory = new Bundle();
+//                bDataCategory.putInt("maban",maban);
+//                displayCategoryFragment.setArguments(bDataCategory);
+//
+//                transaction.replace(R.id.contentView,displayCategoryFragment).addToBackStack("hienthibanan");
+//                transaction.commit();
                 break;
 
-            case R.id.img_customtable_ThanhToan:
+            case R.id.img_customtable_Payment:
                 //chuyển dữ liệu qua trang thanh toán
-                Intent iThanhToan = new Intent(context, PaymentActivity.class);
-                iThanhToan.putExtra("maban",maban);
-                iThanhToan.putExtra("tenban",tenban);
-                iThanhToan.putExtra("ngaydat",ngaydat);
-                context.startActivity(iThanhToan);
+//                Intent iThanhToan = new Intent(context, PaymentActivity.class);
+//                iThanhToan.putExtra("maban",maban);
+//                iThanhToan.putExtra("tenban",tenban);
+//                iThanhToan.putExtra("ngaydat",ngaydat);
+//                context.startActivity(iThanhToan);
                 break;
         }
     }

@@ -34,7 +34,8 @@ public class AddTableActivity extends AppCompatActivity {
                     tableSeat.setOr_status(false);
                     //trả về result cho displaytable
                     Intent intent = new Intent();
-                    intent.putExtra("ketquathem", AppDatabase.getInstance(AddTableActivity.this).tableDAO().insert(tableSeat));
+                    AppDatabase.getInstance(AddTableActivity.this).tableDAO().insert(tableSeat);
+                    intent.putExtra("ketquathem", true);
                     setResult(RESULT_OK,intent);
                     finish();
                 }

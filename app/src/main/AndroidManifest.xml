@@ -13,6 +13,13 @@
         android:theme="@style/Theme.CafeManagerApp"
         tools:targetApi="31">
         <activity
+            android:name=".EditTableActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.WellcomeActivity"
             android:exported="true">
             <intent-filter>
@@ -27,7 +34,7 @@
         </activity>
         <activity
             android:name=".Activity.AddTableActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity.UserCRUDActivity"
             android:exported="false" />
@@ -42,8 +49,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -83,7 +83,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
 
                 FragmentTransaction tranDisplayStaff= getActivity().getSupportFragmentManager().beginTransaction();
                // tranDisplayStaff.replace(R.id.contentView,new DisplayStaffFragment());
-                tranDisplayStaff.replace(R.id.contentView,new DisplayTableFragment());
+                tranDisplayStaff.replace(R.id.contentView,new TableFragment());
                 tranDisplayStaff.addToBackStack(null);
                 tranDisplayStaff.commit();
                 navigationView.setCheckedItem(R.id.nav_staff);
