@@ -115,7 +115,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                tranDisplayMenu.commit();
 //                navigationView.setCheckedItem(item.getItemId());
 //                drawerLayout.closeDrawers();
-//
+////
                  break;
 
             case R.id.nav_staff:
