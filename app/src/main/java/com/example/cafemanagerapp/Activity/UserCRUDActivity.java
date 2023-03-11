@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,13 +28,16 @@ public class UserCRUDActivity extends AppCompatActivity {
     private List<User> mListUser;
     private UserCRUDAdapter userCRUDAdapter;
     private RecyclerView rcvUser;
-
+    private int u_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_crudactivity);
         initUi();
         mListUser = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences("save role", Context.MODE_PRIVATE);
+        u_id = sharedPreferences.getInt("u_id",0);
+        Toast.makeText(UserCRUDActivity.this, "hello:"+u_id, Toast.LENGTH_SHORT).show();
         userCRUDAdapter = new UserCRUDAdapter(new UserCRUDAdapter.IClickUpdate() {
             @Override
             public void updateUser(User user) {
@@ -105,7 +110,12 @@ public class UserCRUDActivity extends AppCompatActivity {
         startActivity(i);
     }
     private void deleteUserFunction(User u){
+
         List<User> allAdmins = AppDatabase.getInstance(this).userDAO().getAllAdmin();
+        if(u.getUser_id() == u_id){
+            Toast.makeText(UserCRUDActivity.this, "Can not delete yourselt!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(allAdmins.size() <= 1 && u.isAdmin == true){
                         Toast.makeText(UserCRUDActivity.this, "Can not delete the last admin!", Toast.LENGTH_SHORT).show();
                     }

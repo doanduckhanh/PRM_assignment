@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("save role", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("role", user.getAdmin());
+                    editor.putInt("u_id", user.getUser_id());
                     editor.commit();
 
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);

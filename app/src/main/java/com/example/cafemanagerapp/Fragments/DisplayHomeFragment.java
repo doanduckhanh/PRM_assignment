@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.cafemanagerapp.Activity.HomeActivity;
+import com.example.cafemanagerapp.Activity.UserCRUDActivity;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -81,12 +82,15 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.layout_displayhome_XemNV:
 
-                FragmentTransaction tranDisplayStaff= getActivity().getSupportFragmentManager().beginTransaction();
-               // tranDisplayStaff.replace(R.id.contentView,new DisplayStaffFragment());
-                tranDisplayStaff.replace(R.id.contentView,new DisplayTableFragment());
-                tranDisplayStaff.addToBackStack(null);
-                tranDisplayStaff.commit();
-                navigationView.setCheckedItem(R.id.nav_staff);
+//                FragmentTransaction tranDisplayStaff= getActivity().getSupportFragmentManager().beginTransaction();
+//               // tranDisplayStaff.replace(R.id.contentView,new DisplayStaffFragment());
+//                tranDisplayStaff.replace(R.id.contentView,new DisplayTableFragment());
+//                tranDisplayStaff.addToBackStack(null);
+//                tranDisplayStaff.commit();
+//                navigationView.setCheckedItem(R.id.nav_staff);
+                Intent intent = new Intent(getActivity(), UserCRUDActivity.class);
+                startActivity(intent);
+
 
                 break;
 
