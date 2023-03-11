@@ -13,6 +13,7 @@ import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.R;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,11 @@ public class UserCRUDActivity extends AppCompatActivity {
             public void updateUser(User user) {
                 updateUserFunction(user);
             }
+        }, new UserCRUDAdapter.IClickDetail() {
+            @Override
+            public void detailUser(User user) {
+                detailUserFunction(user);
+            }
         });
         LinearLayoutManager l = new LinearLayoutManager(this);
         rcvUser.setLayoutManager(l);
@@ -48,7 +54,8 @@ public class UserCRUDActivity extends AppCompatActivity {
 //        u.setPassword("123");
 //        u.setPhone("1900100co");
 //        u.setUsername("ABC");
-//        UserDatabase.getInstance(this).userDAO().insert(u);
+//        u.setDob(Date.valueOf("1999-4-23"));
+//        AppDatabase.getInstance(this).userDAO().insert(u);
         mListUser =  AppDatabase.getInstance(this).userDAO().getAll();
         userCRUDAdapter.setData(mListUser);
     }
@@ -60,6 +67,15 @@ public class UserCRUDActivity extends AppCompatActivity {
         Intent i = new Intent(UserCRUDActivity.this,UserCrudUpdateActivity.class);
         Bundle b = new Bundle();
         b.putInt("id",u.getUser_id());
+        b.putInt("function",2);
+        i.putExtras(b);
+        startActivity(i);
+    }
+    private void detailUserFunction(User u){
+        Intent i = new Intent(UserCRUDActivity.this,UserCrudUpdateActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id",u.getUser_id());
+        b.putInt("function",1);
         i.putExtras(b);
         startActivity(i);
     }

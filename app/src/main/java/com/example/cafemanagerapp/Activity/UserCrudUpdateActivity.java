@@ -42,18 +42,19 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     private int defaultDay=1;
     private int defaultMonth=1;
     private int defaultYear=2001;
+    private int function;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_crud_update);
 
         id = getIntent().getExtras().getInt("id");
+        function = getIntent().getExtras().getInt("function");
         user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
         initUI();
         loadData();
 
         Calendar calendar =Calendar.getInstance();
-
         edit_dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,25 +75,36 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 edit_dob.setText(date);
             }
         };
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User u = null;
+        if(function==2){
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    User u = null;
 
                     u = getInputUser();
 
-                if(u == null){
-                    Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
-                    return;
+                    if(u == null){
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
+                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
+                        Intent i = new Intent(UserCrudUpdateActivity.this,UserCRUDActivity.class);
+                        startActivity(i);
+                    }
                 }
-                else{
-                    Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
-                    AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
-                    Intent i = new Intent(UserCrudUpdateActivity.this,UserCRUDActivity.class);
-                    startActivity(i);
+            });
+        }
+        if(function ==1){
+            btnUpdate.setText("Go back");
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserCrudUpdateActivity.super.onBackPressed();
                 }
-            }
-        });
+            });
+        }
 
     }
     private void initUI(){

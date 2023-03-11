@@ -16,13 +16,18 @@ import java.util.List;
 
 public class UserCRUDAdapter extends RecyclerView.Adapter<UserCRUDAdapter.UserCRUDViewHolder>{
     private IClickUpdate iClickUpdate;
+    private IClickDetail iClickDetail;
     public interface IClickUpdate{
         void updateUser(User user);
     }
+    public interface IClickDetail{
+        void detailUser(User user);
+    }
     private List<User> mListUser;
 
-    public UserCRUDAdapter(IClickUpdate iClickUpdate) {
+    public UserCRUDAdapter(IClickUpdate iClickUpdate,IClickDetail iClickDetail) {
         this.iClickUpdate = iClickUpdate;
+        this.iClickDetail = iClickDetail;
     }
 
     @NonNull
@@ -44,6 +49,12 @@ public class UserCRUDAdapter extends RecyclerView.Adapter<UserCRUDAdapter.UserCR
             @Override
             public void onClick(View view) {
                 iClickUpdate.updateUser(user);
+            }
+        });
+        holder.btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickDetail.detailUser(user);
             }
         });
     }
