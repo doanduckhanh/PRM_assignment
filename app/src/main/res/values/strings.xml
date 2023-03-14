@@ -15,8 +15,8 @@
     <string name="enter_password">Mật khẩu</string>
     <string name="btn_next">Tiếp theo</string>
     <string name="btn_complete">Hoàn thành</string>
-    <string name="add_sucessful">Thêm thành công!</string>
-    <string name="add_failed">Thêm thất bại!</string>
+    <string name="add_sucessful">Add Sucessful!</string>
+    <string name="add_failed">Add Failed!</string>
     <string name="edit_sucessful">Edit Sucessful!</string>
     <string name="edit_failed">Edit Failed!</string>
     <string name="delete_sucessful">Delete Sucessful!</string>
