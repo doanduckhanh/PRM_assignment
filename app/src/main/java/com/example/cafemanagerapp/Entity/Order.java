@@ -3,23 +3,17 @@ package com.example.cafemanagerapp.Entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.example.cafemanagerapp.DAO.DateConverter;
-
-import java.sql.Date;
 
 @Entity(tableName = "order")
-@TypeConverters(DateConverter.class)
 public class Order {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     int order_id;
     @ColumnInfo(name = "table_id")
     int table_id;
     @ColumnInfo(name = "user_id")
     int user_id;
     @ColumnInfo(name = "order_date")
-    Date order_date;
+    String order_date;
     @ColumnInfo(name="total")
     String total;
     @ColumnInfo(name = "order_status")
@@ -28,7 +22,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int order_id, int table_id, int user_id, Date order_date, String total, String order_status) {
+    public Order(int order_id, int table_id, int user_id, String order_date, String total, String order_status) {
         this.order_id = order_id;
         this.table_id = table_id;
         this.user_id = user_id;
@@ -61,11 +55,11 @@ public class Order {
         this.user_id = user_id;
     }
 
-    public Date getOrder_date() {
+    public String getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(String order_date) {
         this.order_date = order_date;
     }
 

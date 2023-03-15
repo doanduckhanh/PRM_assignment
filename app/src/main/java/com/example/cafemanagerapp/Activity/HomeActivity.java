@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cafemanagerapp.Fragments.DisplayHomeFragment;
+import com.example.cafemanagerapp.Fragments.TableFragment;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -102,12 +103,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_table:
-//                FragmentTransaction tranDisplayTable = fragmentManager.beginTransaction();
-//                DisplayTableFragment displayTableFragment = new DisplayTableFragment();
-//                tranDisplayTable.replace(R.id.contentView,displayTableFragment);
-//                tranDisplayTable.commit();
-//                navigationView.setCheckedItem(item.getItemId());
-//                drawerLayout.closeDrawers();
+                FragmentTransaction tranDisplayTable = fragmentManager.beginTransaction();
+                TableFragment displayTableFragment = new TableFragment();
+                tranDisplayTable.replace(R.id.contentView,displayTableFragment);
+                tranDisplayTable.commit();
+                navigationView.setCheckedItem(item.getItemId());
+                drawerLayout.closeDrawers();
                 break;
 
             case R.id.nav_category:
