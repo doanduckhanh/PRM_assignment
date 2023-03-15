@@ -84,7 +84,6 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
             case R.id.layout_displayhome_XemNV:
                 Intent intent = new Intent(getActivity(), UserCRUDActivity.class);
                 startActivity(intent);
-
                 break;
 
             case R.id.txt_displayhome_ViewAllCategory:

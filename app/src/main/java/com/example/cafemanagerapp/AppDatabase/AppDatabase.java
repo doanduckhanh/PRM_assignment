@@ -7,11 +7,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.cafemanagerapp.DAO.CategoryDAO;
-import com.example.cafemanagerapp.DAO.TableDAO;
+
 import com.example.cafemanagerapp.DAO.UserDAO;
 import com.example.cafemanagerapp.Entity.Category;
 import com.example.cafemanagerapp.Entity.Food;
-import com.example.cafemanagerapp.Entity.Table;
+
 import com.example.cafemanagerapp.Entity.User;
 
 @Database(entities = {User.class, Food.class, Category.class, Table.class},version = 4)
