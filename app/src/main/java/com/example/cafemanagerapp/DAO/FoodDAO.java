@@ -1,5 +1,6 @@
 package com.example.cafemanagerapp.DAO;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,7 +10,7 @@ import com.example.cafemanagerapp.Entity.Food;
 import com.example.cafemanagerapp.Entity.User;
 
 import java.util.List;
-
+@Dao
 public interface FoodDAO {
     @Query("SELECT * FROM Food")
     List<Food> getAllFood();

@@ -79,7 +79,7 @@ public class UserCRUDActivity extends AppCompatActivity {
 //        User u = new User();
 //        u.setFull_name("Nguyen Huy Hoang");
 //        u.setEmail("ABC@GMAI");
-//        u.setAdmin(false);
+//        u.setAdmin(true);
 //        u.setGender(true);
 //        u.setPassword("123");
 //        u.setPhone("1900100co");
