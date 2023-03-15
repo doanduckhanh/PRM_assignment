@@ -54,7 +54,7 @@
                         android:layout_height="65dp"
                         android:elevation="8dp"
                         android:layout_margin="10dp"
-                        android:background="@color/caffe"
+                        android:background="@color/colorPrimary"
                         >
 
                         <ImageView
@@ -86,7 +86,7 @@
                         android:layout_height="65dp"
                         android:elevation="8dp"
                         android:layout_margin="10dp"
-                        android:background="@color/caffe"
+                        android:background="@color/colorPrimary"
                         >
 
                         <ImageView
@@ -118,7 +118,7 @@
                         android:layout_height="65dp"
                         android:elevation="8dp"
                         android:layout_margin="10dp"
-                        android:background="@color/caffe"
+                        android:background="@color/colorPrimary"
                         >
 
                         <ImageView
@@ -150,7 +150,7 @@
                         android:layout_height="65dp"
                         android:elevation="8dp"
                         android:layout_margin="10dp"
-                        android:background="@color/caffe"
+                        android:background="@color/colorPrimary"
                         >
                         <ImageView
                             android:layout_width="35dp"
