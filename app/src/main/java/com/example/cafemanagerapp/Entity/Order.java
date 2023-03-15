@@ -3,11 +3,6 @@ package com.example.cafemanagerapp.Entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.example.cafemanagerapp.DAO.DateConverter;
-
-import java.util.Date;
 
 @Entity(tableName = "order")
 public class Order {
