@@ -2,7 +2,9 @@ package com.example.cafemanagerapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +23,7 @@ import com.example.cafemanagerapp.R;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 
 public class UserCrudUpdateActivity extends AppCompatActivity {
     private TextView edit_dob;
@@ -42,18 +45,80 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     private int defaultDay=1;
     private int defaultMonth=1;
     private int defaultYear=2001;
+    private int function;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_crud_update);
 
         id = getIntent().getExtras().getInt("id");
-        user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
-        initUI();
-        loadData();
+        function = getIntent().getExtras().getInt("function");
 
+        if(function ==1){
+            user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
+            initUI();
+            setCalendar();
+            loadData();
+            btnUpdate.setText("Go back");
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserCrudUpdateActivity.super.onBackPressed();
+                }
+            });
+        } else if (function == 2) {
+            user = AppDatabase.getInstance(this).userDAO().LayNVTheoMa(id);
+            initUI();
+            setCalendar();
+            loadData();
+            List<User> allAdmins = AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().getAllAdmin();
+            int size = allAdmins.size();
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    User u = null;
+                    u = getInputUser();
+                    if(size <= 1 && user.isAdmin == true && u.isAdmin ==false){
+                        rbIsAdmin.setChecked(true);
+                        Toast.makeText(UserCrudUpdateActivity.this, "You are the last admin!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if(u == null){
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
+                        Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
+                        UserCrudUpdateActivity.super.onBackPressed();
+                    }
+                }
+            });
+        } else if (function == 0) {
+            initUI();
+            setCalendar();
+            btnUpdate.setText("Add new");
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    User u = null;
+                    u = getInputUser();
+                    if(u == null){
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else{
+                        AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().insert(u);
+                        Toast.makeText(UserCrudUpdateActivity.this, "User added!", Toast.LENGTH_SHORT).show();
+                        UserCrudUpdateActivity.super.onBackPressed();
+                    }
+                }
+            });
+        }
+    }
+    private void setCalendar(){
         Calendar calendar =Calendar.getInstance();
-
         edit_dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,26 +139,6 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 edit_dob.setText(date);
             }
         };
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User u = null;
-
-                    u = getInputUser();
-
-                if(u == null){
-                    Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else{
-                    Toast.makeText(UserCrudUpdateActivity.this, "User updated!", Toast.LENGTH_SHORT).show();
-                    AppDatabase.getInstance(UserCrudUpdateActivity.this).userDAO().update(u);
-                    Intent i = new Intent(UserCrudUpdateActivity.this,UserCRUDActivity.class);
-                    startActivity(i);
-                }
-            }
-        });
-
     }
     private void initUI(){
         tvId= findViewById(R.id.tv_id);
@@ -133,8 +178,6 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
         defaultYear = Integer.parseInt(dateArray[0]);
         defaultMonth = Integer.parseInt(dateArray[1]);
         defaultDay = Integer.parseInt(dateArray[2]);
-
-
     }
     public void MaleClicked(View view) {
         rbMale.setChecked(true);
@@ -149,7 +192,9 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     }
     private User getInputUser(){
         User u =new User();
-        u.setUser_id(id);
+        if(id != 0){
+            u.setUser_id(id);
+        }
             if(editFullName.getText().toString().isEmpty()
             ||editUserName.getText().toString().isEmpty()
             ||editPassword.getText().toString().isEmpty()
