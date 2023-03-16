@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.example.cafemanagerapp.Adapter.FoodCrudAdapter;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
+import com.example.cafemanagerapp.Entity.Category;
 import com.example.cafemanagerapp.Entity.Food;
 import com.example.cafemanagerapp.R;
 
@@ -64,6 +65,7 @@ public class DisplayFoodCrudFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView =  inflater.inflate(R.layout.fragment_display_food_crud, container, false);
         initUI(rootView);
         mListFood = new ArrayList<>();
@@ -74,6 +76,7 @@ public class DisplayFoodCrudFragment extends Fragment {
             }
         });
         thisContext =container.getContext();
+        fixedCategory();
         LinearLayoutManager l = new LinearLayoutManager(thisContext);
         rcvItemFood.setLayoutManager(l);
         rcvItemFood.setAdapter(foodCrudAdapter);
@@ -118,6 +121,23 @@ public class DisplayFoodCrudFragment extends Fragment {
             }
         });
         return rootView;
+    }
+    private void fixedCategory(){
+        Category c = new Category();
+        c.setKindName("Coffee");
+        Category c2 = new Category();
+        c2.setKindName("Tea");
+        Category c3 = new Category();
+        c3.setKindName("Milk tea");
+        Category c4 = new Category();
+        c4.setKindName("Fast food");
+        Category c5 = new Category();
+        c5.setKindName("Cake");
+        AppDatabase.getInstance(thisContext).categoryDAO().addCategory(c);
+        AppDatabase.getInstance(thisContext).categoryDAO().addCategory(c2);
+        AppDatabase.getInstance(thisContext).categoryDAO().addCategory(c3);
+        AppDatabase.getInstance(thisContext).categoryDAO().addCategory(c4);
+        AppDatabase.getInstance(thisContext).categoryDAO().addCategory(c5);
     }
 
     private void initUI(View v){
