@@ -21,4 +21,6 @@ public interface CategoryDAO {
     void updateCategory(Category c);
     @Delete
     void deleteFood(Category c);
+    @Query("Select * from Category where KindName = :name")
+    Category getCategoryWithName(String name);
 }

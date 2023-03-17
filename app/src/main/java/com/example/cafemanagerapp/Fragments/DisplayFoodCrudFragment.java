@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,19 +16,19 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -49,7 +48,6 @@ public class DisplayFoodCrudFragment extends Fragment {
     private EditText editPrice;
     private RadioButton rbActive;
     private RadioButton rbInactive;
-    private EditText editCategory;
     private ImageView ivImg;
     private Button btnChosse;
     private Button btnAdd;
@@ -61,6 +59,8 @@ public class DisplayFoodCrudFragment extends Fragment {
     private Context thisContext;
     private EditText editFoodId;
     private Uri thisUri;
+    private Spinner mySpinner;
+    private Spinner dropdown;
     ActivityResultLauncher<String> mGetContent;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,7 +76,7 @@ public class DisplayFoodCrudFragment extends Fragment {
             }
         });
         thisContext =container.getContext();
-        fixedCategory();
+//        fixedCategory();
         LinearLayoutManager l = new LinearLayoutManager(thisContext);
         rcvItemFood.setLayoutManager(l);
         rcvItemFood.setAdapter(foodCrudAdapter);
@@ -145,7 +145,6 @@ public class DisplayFoodCrudFragment extends Fragment {
         editPrice = v.findViewById(R.id.edit_Price);
         rbActive =v.findViewById(R.id.rb_Active);
         rbInactive =v.findViewById(R.id.rb_Inactive);
-        editCategory = v.findViewById(R.id.edit_Category);
         ivImg = v.findViewById(R.id.tv_Img);
         btnChosse = v.findViewById(R.id.btn_Img);
         btnAdd = v.findViewById(R.id.btn_Add);
@@ -153,6 +152,8 @@ public class DisplayFoodCrudFragment extends Fragment {
         btnDelete = v.findViewById(R.id.btn_Delete);
         rcvItemFood =v.findViewById(R.id.rcv_item_food);
         editFoodId =v.findViewById(R.id.edit_FoodId);
+        //get the spinner from the xml.
+        dropdown = v.findViewById(R.id.spinner1);
     }
     private void LoadData(){
 //        Food f = new Food();
@@ -164,6 +165,17 @@ public class DisplayFoodCrudFragment extends Fragment {
 //        AppDatabase.getInstance(getActivity()).foodDAO().addFood(f);
         mListFood =  AppDatabase.getInstance(thisContext).foodDAO().getAllFood();
         foodCrudAdapter.setData(mListFood);
+
+//create a list of items for the spinner.
+        List<Category> listC = AppDatabase.getInstance(thisContext).categoryDAO().getAllCategory();
+        String[] items = new String[listC.size()];
+        int index = 0;
+        for (Category c : listC) {
+            items[index] = (String) c.getKindName();
+            index++;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(thisContext, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
     }
 
     private Bitmap convertImageViewToBitmap(ImageView v){
@@ -177,7 +189,9 @@ public class DisplayFoodCrudFragment extends Fragment {
         }
         try{
             if(editFullName.getText().toString().isEmpty()||
-            editPrice.getText().toString().isEmpty()
+            editPrice.getText().toString().isEmpty()||
+                    Integer.parseInt(editPrice.getText().toString())<=0||
+                    dropdown.getSelectedItem().toString().isEmpty()
             ){
                 return null;
             }
@@ -191,11 +205,16 @@ public class DisplayFoodCrudFragment extends Fragment {
                     f.setStatus("false");
                 }
                 f.setImage(getBytesFromBitmap(convertImageViewToBitmap(ivImg)));
+                f.setCategory_id(getCategoryId(dropdown.getSelectedItem().toString()));
             }
         }catch(Exception ex){
             return null;
         }
         return f;
+    }
+    private int getCategoryId(String name){
+        Category c = AppDatabase.getInstance(thisContext).categoryDAO().getCategoryWithName(name);
+        return c.getId();
     }
     private void showFoodInfo(Food f){
         if(!String.valueOf(f.getFood_id()).isEmpty()){
@@ -203,7 +222,6 @@ public class DisplayFoodCrudFragment extends Fragment {
         }
         editFullName.setText(f.getFood_name());
         editPrice.setText((f.getPrice()));
-        editCategory.setText(String.valueOf(f.getCategory_id()));
         ivImg.setImageBitmap(BitmapFactory.decodeByteArray(f.getImage(),0,f.getImage().length));
         if(f.getStatus().equals("true")){
             rbActive.setChecked(true);
@@ -211,6 +229,7 @@ public class DisplayFoodCrudFragment extends Fragment {
         else{
             rbInactive.setChecked(true);
         }
+        dropdown.setSelection(f.getCategory_id()-1);
     }
     public byte[] getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -219,7 +238,6 @@ public class DisplayFoodCrudFragment extends Fragment {
     }
     private void clearFoodInfo(){
         editFoodId.setText("");
-        editCategory.setText("");
         editPrice.setText("");
         editFullName.setText("");
     }
@@ -282,6 +300,7 @@ public class DisplayFoodCrudFragment extends Fragment {
                 AppDatabase.getInstance(thisContext).foodDAO().updateFood(f);
                 Toast.makeText(thisContext, "Food updated successfull!", Toast.LENGTH_SHORT).show();
                 clearFoodInfo();
+                LoadData();
             }
             else{
                 Toast.makeText(thisContext, "Select a food first!", Toast.LENGTH_SHORT).show();
