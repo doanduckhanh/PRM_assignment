@@ -38,6 +38,7 @@ public class FoodCrudAdapter extends RecyclerView.Adapter<FoodCrudAdapter.FoodCr
     public void onBindViewHolder(@NonNull FoodCrudViewHolder holder, int position) {
         Food f = mListFood.get(position);
         holder.tvFullName.setText(f.getFood_name());
+        holder.tvPrice.setText(f.getPrice());
         holder.ivImage.setImageBitmap(BitmapFactory.decodeByteArray(f.getImage(),0,f.getImage().length));
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +64,13 @@ public class FoodCrudAdapter extends RecyclerView.Adapter<FoodCrudAdapter.FoodCr
         private TextView tvFullName;
         private ImageView ivImage;
         private View layoutItem;
+        private TextView tvPrice;
         public FoodCrudViewHolder(@NonNull View itemView){
             super(itemView);
             tvFullName = itemView.findViewById(R.id.tv_fullName);
             ivImage = itemView.findViewById(R.id.iv_image);
             layoutItem = itemView.findViewById(R.id.layout_item);
+            tvPrice = itemView.findViewById(R.id.tv_price);
         }
     }
 }
