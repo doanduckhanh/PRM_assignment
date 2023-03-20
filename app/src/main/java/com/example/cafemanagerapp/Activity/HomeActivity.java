@@ -95,6 +95,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 tranDisplayHome.commit();
                 navigationView.setCheckedItem(item.getItemId());
                 drawerLayout.closeDrawers();
+
+
                 break;
             case R.id.nav_statistic:
 //                FragmentTransaction tranDisplayStatistic = fragmentManager.beginTransaction();
@@ -106,9 +108,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_table:
-                FragmentTransaction tranDisplayTable = fragmentManager.beginTransaction();
-                TableFragment displayTableFragment = new TableFragment();
-                tranDisplayTable.replace(R.id.contentView,displayTableFragment);
+//                FragmentTransaction tranDisplayTable = fragmentManager.beginTransaction();
+//                TableFragment displayTableFragment = new TableFragment();
+//                tranDisplayTable.replace(R.id.contentView,displayTableFragment);
+//                tranDisplayTable.commit();
+//                navigationView.setCheckedItem(item.getItemId());
+//                drawerLayout.closeDrawers();
+
+                FragmentTransaction tranDisplayTable = this.getSupportFragmentManager().beginTransaction();
+                tranDisplayTable.replace(R.id.contentView,new TableFragment());
+                tranDisplayTable.addToBackStack(null);
                 tranDisplayTable.commit();
                 navigationView.setCheckedItem(item.getItemId());
                 drawerLayout.closeDrawers();
@@ -121,12 +130,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                tranDisplayMenu.commit();
 //                navigationView.setCheckedItem(item.getItemId());
 //                drawerLayout.closeDrawers();
-            FragmentTransaction tranFoodCRUD = fragmentManager.beginTransaction();
-            DisplayFoodCrudFragment displayFoodCrudFragment = new DisplayFoodCrudFragment();
-            tranFoodCRUD.replace(R.id.contentView,displayFoodCrudFragment);
-            tranFoodCRUD.commit();
-            navigationView.setCheckedItem(item.getItemId());
-            drawerLayout.closeDrawers();
+                FragmentTransaction tranDisplayFood = this.getSupportFragmentManager().beginTransaction();
+                tranDisplayFood.replace(R.id.contentView,new DisplayFoodCrudFragment());
+                tranDisplayFood.addToBackStack(null);
+                tranDisplayFood.commit();
+                navigationView.setCheckedItem(item.getItemId());
+                drawerLayout.closeDrawers();
                 break;
             case R.id.nav_staff:
                 if(isAdmin == true){
@@ -137,8 +146,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //                    navigationView.setCheckedItem(item.getItemId());
 //                    drawerLayout.closeDrawers();
                     Intent intent = new Intent(HomeActivity.this, UserCRUDActivity.class);
+                    drawerLayout.closeDrawers();
                     startActivity(intent);
-
                 }else {
                     Toast.makeText(getApplicationContext(),"Bạn không có quyền truy cập",Toast.LENGTH_SHORT).show();
                 }
