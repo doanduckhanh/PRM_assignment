@@ -61,7 +61,7 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_baseline_calendar_today_24" />
+                            android:src="@drawable/ic_baseline_add_circle_24" />
                     </RelativeLayout>
 
                     <TextView
@@ -69,7 +69,7 @@
                         android:layout_height="33dp"
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
-                        android:text="Thống kê doanh thu"
+                        android:text="Thêm Loại Sản Phẩm"
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -199,7 +199,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thực đơn loại"
+                    android:text="Category"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:textAllCaps="true"
@@ -209,7 +209,7 @@
                     android:id="@+id/txt_displayhome_ViewAllCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xem tất cả >"
+                    android:text="View All"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     />

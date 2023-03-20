@@ -35,13 +35,10 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
     RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_DonTrongNgay;
     RelativeLayout btn_statistic_home,btn_donhang_home, btn_menu_home, btn_user_home;
     TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
-
     AdapterRecycleViewCategory adapterRecycleViewCategory;
     List<Category> categoryList;
     List<Order> orderList;
-
     private Context thiscontext;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +46,6 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         thiscontext = container.getContext();
         ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Trang chủ");
         setHasOptionsMenu(true);
-        fixedCategory();
         // Todo: lay doi tuong
         rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_displayhome_LoaiMon);
         rcv_displayhome_DonTrongNgay = (RecyclerView)view.findViewById(R.id.rcv_displayhome_DonTrongNgay);
@@ -65,12 +61,10 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_statistic_home.setOnClickListener(this);
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
+        txt_displayhome_ViewAllCategory.setOnClickListener(this);
         return view;
     }
-
     private void DisplayListCategory(){
-
-
         rcv_displayhome_LoaiMon.setHasFixedSize(true);
         rcv_displayhome_LoaiMon.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         categoryList = AppDatabase.getInstance(thiscontext).categoryDAO().getAllCategory();
@@ -78,27 +72,9 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         rcv_displayhome_LoaiMon.setAdapter(adapterRecycleViewCategory);
         adapterRecycleViewCategory.notifyDataSetChanged();
     }
-    private void fixedCategory(){
-        Category c = new Category();
-        c.setKindName("Coffee");
-        Category c2 = new Category();
-        c2.setKindName("Tea");
-        Category c3 = new Category();
-        c3.setKindName("Milk tea");
-        Category c4 = new Category();
-        c4.setKindName("Fast food");
-        Category c5 = new Category();
-        c5.setKindName("Cake");
-        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c);
-        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c2);
-        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c3);
-        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c4);
-        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c5);
-    }
     private void DisplayOrderByDay(){
 
     }
-
     public void onClick(View view){
         int id = view.getId();
         NavigationView navigationView = (NavigationView)getActivity().findViewById(R.id.navigation_view_trangchu);
@@ -114,25 +90,14 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 tranDisplayStatistic.commit();
                 navigationView.setCheckedItem(R.id.nav_statistic);
                 break;
-
             case R.id.layout_displayhome_XemBan:
                 FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayTable.replace(R.id.contentView,new TableFragment());
                 tranDisplayTable.addToBackStack(null);
                 tranDisplayTable.commit();
                 navigationView.setCheckedItem(R.id.nav_table);
-
                 break;
-
             case R.id.layout_displayhome_XemMenu:
-//                Intent iAddCategory = new Intent(getActivity(), AddCategoryActivity.class);
-//                startActivity(iAddCategory);
-//                navigationView.setCheckedItem(R.id.nav_category);
-//                FragmentTransaction tranDisplayMenu = getActivity().getSupportFragmentManager().beginTransaction();
-//                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
-//                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
-//                tranDisplayMenu.commit();
-//                navigationView.setCheckedItem(R.id.nav_category);
                 FragmentTransaction tranDisplayFood = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayFood.replace(R.id.contentView,new DisplayFoodCrudFragment());
                 tranDisplayFood.addToBackStack(null);
@@ -140,19 +105,9 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 navigationView.setCheckedItem(R.id.nav_category);
                 break;
             case R.id.layout_displayhome_XemNV:
-
-//                FragmentTransaction tranDisplayStaff= getActivity().getSupportFragmentManager().beginTransaction();
-//               // tranDisplayStaff.replace(R.id.contentView,new DisplayStaffFragment());
-//                tranDisplayStaff.replace(R.id.contentView,new DisplayTableFragment());
-//                tranDisplayStaff.addToBackStack(null);
-//                tranDisplayStaff.commit();
-//                navigationView.setCheckedItem(R.id.nav_staff);
                 Intent intent = new Intent(getActivity(), UserCRUDActivity.class);
                 startActivity(intent);
-
-
                 break;
-
             case R.id.txt_displayhome_ViewAllCategory:
                 FragmentTransaction tranDisplayCategory = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayCategory.replace(R.id.contentView,new DisplayCategoryFragment());
