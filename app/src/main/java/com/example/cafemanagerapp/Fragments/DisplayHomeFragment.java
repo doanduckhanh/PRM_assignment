@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -18,21 +19,36 @@ import android.widget.TextView;
 
 import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Activity.UserCRUDActivity;
+import com.example.cafemanagerapp.Adapter.AdapterRecycleViewCategory;
+import com.example.cafemanagerapp.AppDatabase.AppDatabase;
+import com.example.cafemanagerapp.DAO.CategoryDAO;
+import com.example.cafemanagerapp.Entity.Category;
+import com.example.cafemanagerapp.Entity.Order;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 
 public class DisplayHomeFragment extends Fragment implements View.OnClickListener{
     RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_DonTrongNgay;
     RelativeLayout btn_statistic_home,btn_donhang_home, btn_menu_home, btn_user_home;
     TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
+
+    AdapterRecycleViewCategory adapterRecycleViewCategory;
+    List<Category> categoryList;
+    List<Order> orderList;
+
+    private Context thiscontext;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_display_home,container,false);
+        thiscontext = container.getContext();
         ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Trang chủ");
         setHasOptionsMenu(true);
-
+        fixedCategory();
         // Todo: lay doi tuong
         rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_displayhome_LoaiMon);
         rcv_displayhome_DonTrongNgay = (RecyclerView)view.findViewById(R.id.rcv_displayhome_DonTrongNgay);
@@ -42,12 +58,44 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_user_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_XemNV);
         txt_displayhome_ViewAllCategory = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllCategory);
         txt_displayhome_ViewAllStatistic = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllStatistic);
-
+        DisplayListCategory();
+        DisplayOrderByDay();
         btn_donhang_home.setOnClickListener(this);
         btn_statistic_home.setOnClickListener(this);
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
         return view;
+    }
+
+    private void DisplayListCategory(){
+
+
+        rcv_displayhome_LoaiMon.setHasFixedSize(true);
+        rcv_displayhome_LoaiMon.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        categoryList = AppDatabase.getInstance(thiscontext).categoryDAO().getAllCategory();
+        adapterRecycleViewCategory = new AdapterRecycleViewCategory(getActivity(), R.layout.custom_layout_displaycategory, categoryList);
+        rcv_displayhome_LoaiMon.setAdapter(adapterRecycleViewCategory);
+        adapterRecycleViewCategory.notifyDataSetChanged();
+    }
+    private void fixedCategory(){
+        Category c = new Category();
+        c.setKindName("Coffee");
+        Category c2 = new Category();
+        c2.setKindName("Tea");
+        Category c3 = new Category();
+        c3.setKindName("Milk tea");
+        Category c4 = new Category();
+        c4.setKindName("Fast food");
+        Category c5 = new Category();
+        c5.setKindName("Cake");
+        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c);
+        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c2);
+        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c3);
+        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c4);
+        AppDatabase.getInstance(thiscontext).categoryDAO().addCategory(c5);
+    }
+    private void DisplayOrderByDay(){
+
     }
 
     public void onClick(View view){

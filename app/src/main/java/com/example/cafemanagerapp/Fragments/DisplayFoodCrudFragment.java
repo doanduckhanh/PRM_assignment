@@ -76,7 +76,7 @@ public class DisplayFoodCrudFragment extends Fragment {
             }
         });
         thisContext =container.getContext();
-//        fixedCategory();
+        //fixedCategory();
         LinearLayoutManager l = new LinearLayoutManager(thisContext);
         rcvItemFood.setLayoutManager(l);
         rcvItemFood.setAdapter(foodCrudAdapter);
