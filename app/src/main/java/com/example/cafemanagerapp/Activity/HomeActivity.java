@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         View view = navigationView.getHeaderView(0);
         txt_menu_username = (TextView) view.findViewById(R.id.txt_menu_tennv);
-        
+
         // Todo: handler toolbar and navigation
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -115,14 +115,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_category:
-                FragmentTransaction tranDisplayMenu = fragmentManager.beginTransaction();
-                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
-                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
-                tranDisplayMenu.commit();
-                navigationView.setCheckedItem(item.getItemId());
-                drawerLayout.closeDrawers();
-                 break;
-
+//                FragmentTransaction tranDisplayMenu = fragmentManager.beginTransaction();
+//                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
+//                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
+//                tranDisplayMenu.commit();
+//                navigationView.setCheckedItem(item.getItemId());
+//                drawerLayout.closeDrawers();
+            FragmentTransaction tranFoodCRUD = fragmentManager.beginTransaction();
+            DisplayFoodCrudFragment displayFoodCrudFragment = new DisplayFoodCrudFragment();
+            tranFoodCRUD.replace(R.id.contentView,displayFoodCrudFragment);
+            tranFoodCRUD.commit();
+            navigationView.setCheckedItem(item.getItemId());
+            drawerLayout.closeDrawers();
+                break;
             case R.id.nav_staff:
                 if(isAdmin == true){
 //                    FragmentTransaction tranDisplayStaff = fragmentManager.beginTransaction();

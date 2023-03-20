@@ -77,10 +77,15 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
 //                Intent iAddCategory = new Intent(getActivity(), AddCategoryActivity.class);
 //                startActivity(iAddCategory);
 //                navigationView.setCheckedItem(R.id.nav_category);
-                FragmentTransaction tranDisplayMenu = getActivity().getSupportFragmentManager().beginTransaction();
-                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
-                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
-                tranDisplayMenu.commit();
+//                FragmentTransaction tranDisplayMenu = getActivity().getSupportFragmentManager().beginTransaction();
+//                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
+//                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
+//                tranDisplayMenu.commit();
+//                navigationView.setCheckedItem(R.id.nav_category);
+                FragmentTransaction tranDisplayFood = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayFood.replace(R.id.contentView,new DisplayFoodCrudFragment());
+                tranDisplayFood.addToBackStack(null);
+                tranDisplayFood.commit();
                 navigationView.setCheckedItem(R.id.nav_category);
                 break;
             case R.id.layout_displayhome_XemNV:
