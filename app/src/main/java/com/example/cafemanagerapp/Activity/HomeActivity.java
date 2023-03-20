@@ -121,22 +121,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_category:
-//<<<<<<< HEAD
-////                FragmentTransaction tranDisplayMenu = fragmentManager.beginTransaction();
-////                DisplayCategoryFragment displayCategoryFragment = new DisplayCategoryFragment();
-////                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
-////                tranDisplayMenu.commit();
-////                navigationView.setCheckedItem(item.getItemId());
-////                drawerLayout.closeDrawers();
-//=======
-//                FragmentTransaction tranDisplayMenu = fragmentManager.beginTransaction();
-//                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
-//                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
-//                tranDisplayMenu.commit();
-//                navigationView.setCheckedItem(item.getItemId());
-//                drawerLayout.closeDrawers();
-////
-//>>>>>>> HoangNH
+                FragmentTransaction tranDisplayMenu = fragmentManager.beginTransaction();
+                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
+                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
+                tranDisplayMenu.commit();
+                navigationView.setCheckedItem(item.getItemId());
+                drawerLayout.closeDrawers();
                  break;
 
             case R.id.nav_staff:

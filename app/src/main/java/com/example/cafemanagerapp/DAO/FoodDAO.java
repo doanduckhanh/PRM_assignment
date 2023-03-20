@@ -20,4 +20,6 @@ public interface FoodDAO {
     void updateFood(Food food);
     @Delete
     void deleteFood(Food food);
+    @Query("SELECT * FROM Food WHERE category_id like '%' || :cate_id || '%'")
+    List<Food> getByCateId(int cate_id);
 }

@@ -172,7 +172,7 @@ public class DisplayCategoryFragment extends Fragment {
 
     //hiển thị dữ liệu trên gridview
     private void HienThiDSLoai(){
-        categoryList = AppDatabase.getInstance(getContext()).categoryDAO().getAll();
+        categoryList = AppDatabase.getInstance(getContext()).categoryDAO().getAllCategory();
         adapter = new AdapterDisplayCategory(getActivity(),R.layout.custom_layout_displaycategory,categoryList);
         gvCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();

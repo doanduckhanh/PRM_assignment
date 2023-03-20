@@ -66,11 +66,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.layout_displayhome_XemBan:
-//                FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
-//                tranDisplayTable.replace(R.id.contentView,new DisplayTableFragment());
-//                tranDisplayTable.addToBackStack(null);
-//                tranDisplayTable.commit();
-//                navigationView.setCheckedItem(R.id.nav_table);
+                FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayTable.replace(R.id.contentView,new TableFragment());
+                tranDisplayTable.addToBackStack(null);
+                tranDisplayTable.commit();
+                navigationView.setCheckedItem(R.id.nav_table);
 
                 break;
 
