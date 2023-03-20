@@ -152,12 +152,12 @@
                         android:layout_margin="10dp"
                         android:background="@color/colorPrimary"
                         >
+
                         <ImageView
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:src="@drawable/ic_baseline_account_circle_24"
                             android:layout_centerInParent="true"
-                            />
+                            android:src="@drawable/ic_baseline_account_circle_24" />
                     </RelativeLayout>
                     <TextView
                         android:layout_width="65dp"
