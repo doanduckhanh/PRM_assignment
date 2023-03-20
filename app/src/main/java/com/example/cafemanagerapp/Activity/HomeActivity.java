@@ -46,12 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         View view = navigationView.getHeaderView(0);
         txt_menu_username = (TextView) view.findViewById(R.id.txt_menu_tennv);
-
-        User u = new User();
-        u.setUsername("1");
-        u.setPassword("1");
-        u.setAdmin(true);
-        AppDatabase.getInstance(this).userDAO().insert(u);
+        
 
         // Todo: handler toolbar and navigation
         setSupportActionBar(toolbar);
