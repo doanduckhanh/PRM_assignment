@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.cafemanagerapp.Activity.AddCategoryActivity;
 import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Adapter.AdapterDisplayCategory;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
@@ -128,7 +129,7 @@ public class DisplayCategoryFragment extends Fragment {
 //        switch (id){
 //            case R.id.itEdit:
 //                Intent iEdit = new Intent(getActivity(), AddCategoryActivity.class);
-//                iEdit.putExtra("maloai",maloai);
+//                iEdit.putExtra("maloai",cate_id);
 //                resultLauncherCategory.launch(iEdit);
 //                break;
 //
@@ -149,26 +150,26 @@ public class DisplayCategoryFragment extends Fragment {
 //    }
 
     //khởi tạo nút thêm loại
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        MenuItem itAddCategory = menu.add(1,R.id.itAddCategory,1,R.string.addCategory);
-//        itAddCategory.setIcon(R.drawable.ic_baseline_add_24);
-//        itAddCategory.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem itAddCategory = menu.add(1,R.id.itAddCategory,1,R.string.addCategory);
+        itAddCategory.setIcon(R.drawable.ic_baseline_add_24);
+        itAddCategory.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+    }
 
     //xử lý nút thêm loại
-//    @Override
-//    public boolean onOptionsItemSelected( MenuItem item) {
-//        int id = item.getItemId();
-//        switch (id){
-//            case R.id.itAddCategory:
-//                Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
-//                resultLauncherCategory.launch(intent);
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.itAddCategory:
+                Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
+                resultLauncherCategory.launch(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     //hiển thị dữ liệu trên gridview
     private void HienThiDSLoai(){
