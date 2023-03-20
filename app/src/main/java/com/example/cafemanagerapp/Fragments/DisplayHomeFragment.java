@@ -57,12 +57,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
             case R.id.layout_displayhome_ThongKe:
 
             case R.id.txt_displayhome_ViewAllStatistic:
-//                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
-//                tranDisplayStatistic.replace(R.id.contentView,new DisplayStatisticFragment());
-//                tranDisplayStatistic.addToBackStack(null);
-//                tranDisplayStatistic.commit();
-//                navigationView.setCheckedItem(R.id.nav_statistic);
-
+                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
+                tranDisplayStatistic.addToBackStack(null);
+                tranDisplayStatistic.commit();
+                navigationView.setCheckedItem(R.id.nav_statistic);
                 break;
 
             case R.id.layout_displayhome_XemBan:
