@@ -47,7 +47,6 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_statistic_home.setOnClickListener(this);
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
-
         return view;
     }
 
@@ -67,11 +66,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.layout_displayhome_XemBan:
-                FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
-                tranDisplayTable.replace(R.id.contentView,new TableFragment());
-                tranDisplayTable.addToBackStack(null);
-                tranDisplayTable.commit();
-                navigationView.setCheckedItem(R.id.nav_table);
+//                FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
+//                tranDisplayTable.replace(R.id.contentView,new DisplayTableFragment());
+//                tranDisplayTable.addToBackStack(null);
+//                tranDisplayTable.commit();
+//                navigationView.setCheckedItem(R.id.nav_table);
 
                 break;
 
@@ -82,8 +81,17 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
 
                 break;
             case R.id.layout_displayhome_XemNV:
+
+//                FragmentTransaction tranDisplayStaff= getActivity().getSupportFragmentManager().beginTransaction();
+//               // tranDisplayStaff.replace(R.id.contentView,new DisplayStaffFragment());
+//                tranDisplayStaff.replace(R.id.contentView,new DisplayTableFragment());
+//                tranDisplayStaff.addToBackStack(null);
+//                tranDisplayStaff.commit();
+//                navigationView.setCheckedItem(R.id.nav_staff);
                 Intent intent = new Intent(getActivity(), UserCRUDActivity.class);
                 startActivity(intent);
+
+
                 break;
 
             case R.id.txt_displayhome_ViewAllCategory:
