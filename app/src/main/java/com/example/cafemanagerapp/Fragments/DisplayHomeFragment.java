@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.cafemanagerapp.Activity.AddCategoryActivity;
 import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Activity.UserCRUDActivity;
 import com.example.cafemanagerapp.R;
@@ -55,7 +56,9 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         NavigationView navigationView = (NavigationView)getActivity().findViewById(R.id.navigation_view_trangchu);
         switch (id){
             case R.id.layout_displayhome_ThongKe:
-
+                Intent intent1 = new Intent(getActivity(), AddCategoryActivity.class);
+                startActivity(intent1);
+                break;
             case R.id.txt_displayhome_ViewAllStatistic:
                 FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
