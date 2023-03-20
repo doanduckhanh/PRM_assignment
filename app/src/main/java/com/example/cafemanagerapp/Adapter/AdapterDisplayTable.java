@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cafemanagerapp.Activity.HomeActivity;
+import com.example.cafemanagerapp.Activity.PaymentActivity;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.OrderDAO;
 import com.example.cafemanagerapp.DAO.TableSeatDAO;
@@ -158,7 +159,11 @@ public class AdapterDisplayTable extends BaseAdapter implements View.OnClickList
                 break;
 
             case R.id.img_customtable_Payment:
-
+                Intent iThanhToan = new Intent(context, PaymentActivity.class);
+                iThanhToan.putExtra("maban",tableId);
+                iThanhToan.putExtra("tenban",tableName);
+                iThanhToan.putExtra("ngaydat",date_created);
+                context.startActivity(iThanhToan);
                 break;
         }
     }

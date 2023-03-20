@@ -21,7 +21,7 @@ import com.example.cafemanagerapp.Entity.Payment;
 import com.example.cafemanagerapp.Entity.TableSeat;
 import com.example.cafemanagerapp.Entity.User;
 
-@Database(entities = {User.class, Food.class, Category.class, TableSeat.class, Order.class, OrderDetail.class, Payment.class},version = 3)
+@Database(entities = {User.class, Food.class, Category.class, TableSeat.class, Order.class, OrderDetail.class, Payment.class},version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "cafemanagerapp.db";
     private static AppDatabase instance;

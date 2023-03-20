@@ -26,6 +26,9 @@
             android:name=".Activity.EditTableActivity"
             android:exported="false"></activity>
         <activity
+            android:name=".Activity.PaymentActivity"
+            android:exported="false"></activity>
+        <activity
             android:name=".Activity.WellcomeActivity"
             android:exported="false">
             <meta-data

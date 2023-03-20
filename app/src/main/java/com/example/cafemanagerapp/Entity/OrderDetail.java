@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class OrderDetail {
-@PrimaryKey
-int order_id;
+    @PrimaryKey
+    public int order_id;
 @ColumnInfo(name = "food_id")
     int food_id;
 @ColumnInfo(name = "quantity")
