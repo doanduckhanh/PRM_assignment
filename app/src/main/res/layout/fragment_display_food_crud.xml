@@ -24,19 +24,20 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Food name: "/>
+                        android:text="Food name: " />
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/edit_FoodId"
                         android:visibility="gone"/>
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:id="@+id/edit_FoodName"
@@ -45,14 +46,15 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:text="Price: "/>
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:inputType="number"
@@ -62,7 +64,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,10 +95,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
                         android:textSize="20sp"
                         android:text="Category: "/>
                     <Spinner
                         android:id="@+id/spinner1"
+                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:spinnerMode="dropdown"/>
@@ -105,7 +110,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="right">
+                android:gravity="right"
+                android:layout_gravity="center">
 
                 <ImageView
                     android:id="@+id/tv_Img"
@@ -123,28 +129,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginVertical="10dp">
+
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_Add"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="ADD"
-                android:id="@+id/btn_Add"/>
+                android:layout_marginHorizontal="10dp"
+                android:text="ADD" />
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Update"
+                android:textSize="10sp"
+                android:layout_marginHorizontal="10dp"
                 android:id="@+id/btn_Update"/>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="DELETE"
+                android:textSize="10sp"
+                android:layout_marginHorizontal="10dp"
                 android:id="@+id/btn_Delete"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_item_food"
             android:layout_width="match_parent"
-            android:layout_height="506dp" />
+            android:layout_height="393dp" />
     </LinearLayout>>
 
 </FrameLayout>
