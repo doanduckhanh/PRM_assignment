@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,6 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
     RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_DonTrongNgay;
     RelativeLayout btn_statistic_home,btn_donhang_home, btn_menu_home, btn_user_home;
     TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,7 +78,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
 //                Intent iAddCategory = new Intent(getActivity(), AddCategoryActivity.class);
 //                startActivity(iAddCategory);
 //                navigationView.setCheckedItem(R.id.nav_category);
-
+                FragmentTransaction tranDisplayMenu = getActivity().getSupportFragmentManager().beginTransaction();
+                DisplayFoodCrudFragment displayCategoryFragment = new DisplayFoodCrudFragment();
+                tranDisplayMenu.replace(R.id.contentView, displayCategoryFragment);
+                tranDisplayMenu.commit();
+                navigationView.setCheckedItem(R.id.nav_category);
                 break;
             case R.id.layout_displayhome_XemNV:
 
@@ -95,12 +99,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.txt_displayhome_ViewAllCategory:
-//                FragmentTransaction tranDisplayCategory = getActivity().getSupportFragmentManager().beginTransaction();
-//                tranDisplayCategory.replace(R.id.contentView,new DisplayCategoryFragment());
-//                tranDisplayCategory.addToBackStack(null);
-//                tranDisplayCategory.commit();
-//                navigationView.setCheckedItem(R.id.nav_category);
-
+                FragmentTransaction tranDisplayCategory = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayCategory.replace(R.id.contentView,new DisplayCategoryFragment());
+                tranDisplayCategory.addToBackStack(null);
+                tranDisplayCategory.commit();
+                navigationView.setCheckedItem(R.id.nav_category);
                 break;
 
         }
