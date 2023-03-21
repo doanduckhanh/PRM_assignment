@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.cafemanagerapp.Entity.Order;
+import com.example.cafemanagerapp.R;
 
 import java.util.List;
 
@@ -57,8 +58,16 @@ public class AdapterDisplayOrder extends BaseAdapter {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(layout,parent,false);
 
-//            viewHolder.btEdit=(Button)view.findViewById(R.id.bt)
+//            viewHolder.btEdit=(Button)view.findViewById(R.id.bt_edit);
+            viewHolder.tvOrderId=(TextView)view.findViewById(R.id.tv_order_id);
+            viewHolder.tvOrderDetail=(TextView)view.findViewById(R.id.tv_order_detail);
+            view.setTag(viewHolder);
+        }else{
+            viewHolder=(ViewHolder)view.getTag();
         }
-        return null;
+        Order order=listOrder.get(position);
+        viewHolder.tvOrderId.setText(String.valueOf(order.getOrder_id()));
+        viewHolder.tvOrderDetail.setText(order.getOrder_date()+"\n"+order.getOrder_status());
+        return view;
     }
 }

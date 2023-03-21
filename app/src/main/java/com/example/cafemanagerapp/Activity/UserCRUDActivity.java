@@ -37,7 +37,7 @@ public class UserCRUDActivity extends AppCompatActivity {
         mListUser = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("save role", Context.MODE_PRIVATE);
         u_id = sharedPreferences.getInt("u_id",0);
-        Toast.makeText(UserCRUDActivity.this, "hello:"+u_id, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(UserCRUDActivity.this, "hello:"+u_id, Toast.LENGTH_SHORT).show();
         userCRUDAdapter = new UserCRUDAdapter(new UserCRUDAdapter.IClickUpdate() {
             @Override
             public void updateUser(User user) {

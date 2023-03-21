@@ -7,11 +7,6 @@
             android:title="Trang chủ"
             android:icon="@drawable/ic_baseline_home_24"/>
 
-        <item
-            android:id="@+id/nav_statistic"
-            android:title="Thống kê"
-            android:icon="@drawable/ic_baseline_bar_chart_24"/>
-
         <item android:title="Quản lý">
             <menu>
                 <group android:checkableBehavior="single">
