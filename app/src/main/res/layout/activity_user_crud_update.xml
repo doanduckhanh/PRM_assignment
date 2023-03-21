@@ -64,7 +64,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Email (email@example.com)"
             android:layout_marginLeft="5dp"
             android:id="@+id/edit_email"
             android:textColor="@color/black"
@@ -208,7 +208,7 @@
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Password(6 or more char)"
             android:layout_marginLeft="5dp"
             android:id="@+id/edit_password"
             android:textColor="@color/black"

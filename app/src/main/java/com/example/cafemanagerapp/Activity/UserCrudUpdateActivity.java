@@ -46,6 +46,7 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
     private int defaultMonth=1;
     private int defaultYear=2001;
     private int function;
+    String checkEmail = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +79,13 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     User u = null;
                     u = getInputUser();
-                    if(size <= 1 && user.isAdmin == true && u.isAdmin ==false){
+                    if(size <= 1 && user.isAdmin == true && u.isAdmin ==false) {
                         rbIsAdmin.setChecked(true);
                         Toast.makeText(UserCrudUpdateActivity.this, "You are the last admin!", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                     if(u == null){
-                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserCrudUpdateActivity.this, "All field must be fill correctly!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     else{
@@ -198,26 +198,30 @@ public class UserCrudUpdateActivity extends AppCompatActivity {
             if(editFullName.getText().toString().isEmpty()
             ||editUserName.getText().toString().isEmpty()
             ||editPassword.getText().toString().isEmpty()
-            ||editPassword.getText().toString().isEmpty()
             ||editEmail.getText().toString().isEmpty()
             ||editPhone.getText().toString().isEmpty()
             ||edit_dob.getText().toString().isEmpty()){
                 return null;
             }else{
+                if(editPassword.getText().length()<6){
+                    Toast.makeText(UserCrudUpdateActivity.this, "Password have to be 6 or more character!", Toast.LENGTH_SHORT).show();
+                    return null;
+                }
+                if(!editEmail.getText().toString().trim().matches(checkEmail)){
+                    Toast.makeText(UserCrudUpdateActivity.this, "Email in wrong format", Toast.LENGTH_SHORT).show();
+                    return null;
+                }
                 u.setFull_name(editFullName.getText().toString());
                 u.setUsername(editUserName.getText().toString());
-                u.setPassword(editPassword.getText().toString());
                 u.setPassword(editPassword.getText().toString());
                 u.setEmail(editEmail.getText().toString());
                 u.setPhone(editPhone.getText().toString());
             }
-
             if(rbMale.isChecked()){
                 u.setGender(true);
             }else{
                 u.setGender(false);
             }
-
             Date date1=Date.valueOf( edit_dob.getText().toString());
             u.setDob(date1);
             if(rbIsAdmin.isChecked()){

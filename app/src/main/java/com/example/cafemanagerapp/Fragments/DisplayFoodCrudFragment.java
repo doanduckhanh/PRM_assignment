@@ -2,7 +2,9 @@ package com.example.cafemanagerapp.Fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +34,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.cafemanagerapp.Activity.UserCRUDActivity;
 import com.example.cafemanagerapp.Adapter.FoodCrudAdapter;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.Category;
@@ -248,7 +251,18 @@ public class DisplayFoodCrudFragment extends Fragment {
         }
         try{
             Food f = getFoodInfo();
-            AppDatabase.getInstance(thisContext).foodDAO().deleteFood(f);
+            new AlertDialog.Builder(thisContext).setTitle("Confirm delete")
+                    .setMessage("Are you sure?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            AppDatabase.getInstance(thisContext).foodDAO().deleteFood(f);
+                            Toast.makeText(thisContext, "Food deleted!!", Toast.LENGTH_SHORT).show();
+                            LoadData();
+                        }
+                    })
+                    .setNegativeButton("No",null)
+                    .show();
             clearFoodInfo();
             LoadData();
         }
