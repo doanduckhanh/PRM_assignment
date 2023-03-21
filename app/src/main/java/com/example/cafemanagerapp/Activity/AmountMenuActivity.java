@@ -52,6 +52,7 @@ public class AmountMenuActivity extends AppCompatActivity {
                     int total_quantity = old_quantity + new_quantity;
 
                     OrderDetail orderDetail1 = new OrderDetail();
+                    orderDetail1.setOrderdetail_id(orderDetail.getOrderdetail_id());
                     orderDetail1.setOrder_id(order_id);
                     orderDetail1.setFood_id(food_id);
                     orderDetail1.setQuantity(total_quantity);
