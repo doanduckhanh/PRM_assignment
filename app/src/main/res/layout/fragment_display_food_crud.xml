@@ -26,11 +26,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginVertical="10dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text="Food name: " />
+                        android:text="Food name: "
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
+                        android:textColor="#000000"
                         android:text="Price: "/>
                     <EditText
                         android:layout_width="75dp"
@@ -70,6 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
+                        android:textColor="#000000"
                         android:text="Status: "
                         android:layout_gravity="center"/>
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -97,6 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="15dp"
                         android:textSize="20sp"
+                        android:textColor="#000000"
                         android:text="Category: "/>
                     <Spinner
                         android:id="@+id/spinner1"
