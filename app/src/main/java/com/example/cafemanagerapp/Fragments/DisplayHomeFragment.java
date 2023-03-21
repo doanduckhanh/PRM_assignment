@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.cafemanagerapp.Activity.AddCategoryActivity;
 import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Activity.UserCRUDActivity;
+import com.example.cafemanagerapp.Adapter.AdapterDisplayOrder;
 import com.example.cafemanagerapp.Adapter.AdapterRecycleViewCategory;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.CategoryDAO;
@@ -32,10 +33,12 @@ import java.util.List;
 
 
 public class DisplayHomeFragment extends Fragment implements View.OnClickListener{
-    RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_DonTrongNgay;
+    RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_order;
     RelativeLayout btn_statistic_home,btn_donhang_home, btn_menu_home, btn_user_home;
     TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
     AdapterRecycleViewCategory adapterRecycleViewCategory;
+
+
     List<Category> categoryList;
     List<Order> orderList;
     private Context thiscontext;
@@ -48,7 +51,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         setHasOptionsMenu(true);
         // Todo: lay doi tuong
         rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_displayhome_LoaiMon);
-        rcv_displayhome_DonTrongNgay = (RecyclerView)view.findViewById(R.id.rcv_displayhome_DonTrongNgay);
+        rcv_displayhome_order = (RecyclerView)view.findViewById(R.id.rcv_displayhome_DonTrongNgay);
         btn_statistic_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_ThongKe);
         btn_donhang_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_XemBan);
         btn_menu_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_XemMenu);
@@ -56,7 +59,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         txt_displayhome_ViewAllCategory = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllCategory);
         txt_displayhome_ViewAllStatistic = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllStatistic);
         DisplayListCategory();
-        DisplayOrderByDay();
+        DisplayOrder();
         btn_donhang_home.setOnClickListener(this);
         btn_statistic_home.setOnClickListener(this);
         btn_menu_home.setOnClickListener(this);
@@ -72,7 +75,11 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         rcv_displayhome_LoaiMon.setAdapter(adapterRecycleViewCategory);
         adapterRecycleViewCategory.notifyDataSetChanged();
     }
-    private void DisplayOrderByDay(){
+    private void DisplayOrder(){
+        rcv_displayhome_order.setHasFixedSize(true);
+        rcv_displayhome_order.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        orderList=AppDatabase.getInstance(thiscontext).orderDAO().getAll();
+
 
     }
     public void onClick(View view){

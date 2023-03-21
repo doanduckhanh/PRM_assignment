@@ -22,6 +22,7 @@ import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.User;
 import com.example.cafemanagerapp.Fragments.DisplayFoodCrudFragment;
 import com.example.cafemanagerapp.Fragments.DisplayHomeFragment;
+import com.example.cafemanagerapp.Fragments.DisplayOrderFragment;
 import com.example.cafemanagerapp.Fragments.TableFragment;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.navigation.NavigationView;
@@ -124,6 +125,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_logout:
                 Intent intent = new Intent(getApplicationContext(),WellcomeActivity.class);
                 startActivity(intent);
+                break;
+            default:
+                FragmentTransaction transactionDisplayOrder=this.getSupportFragmentManager().beginTransaction();
+                transactionDisplayOrder.replace(R.id.contentView, new DisplayOrderFragment());
+                transactionDisplayOrder.addToBackStack(null);
+                transactionDisplayOrder.commit();
+                navigationView.setCheckedItem(item.getItemId());
+                drawerLayout.closeDrawers();
                 break;
         }
         return false;

@@ -1,15 +1,23 @@
 package com.example.cafemanagerapp.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import com.example.cafemanagerapp.Activity.AddCategoryActivity;
 import com.example.cafemanagerapp.Activity.AmountMenuActivity;
 import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Adapter.AdapterDisplayMenu;
@@ -18,6 +26,7 @@ import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.OrderDAO;
 import com.example.cafemanagerapp.Entity.Order;
 import com.example.cafemanagerapp.R;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -33,46 +42,26 @@ public class DisplayOrderFragment extends Fragment {
     List<Order> listOrder;
 
     AdapterDisplayOrder adapterDisplayOrder;
-//
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    public DisplayOrderFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment DisplayOrderFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static DisplayOrderFragment newInstance(String param1, String param2) {
-//        DisplayOrderFragment fragment = new DisplayOrderFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
+
+    FragmentManager fragmentManager;
+
+    ActivityResultLauncher<Intent> resultLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode()== Activity.RESULT_OK){
+                        Intent intent=result.getData();
+                        boolean check=intent.getBooleanExtra("check",false);
+                        if (check){
+                            showOrder();
+                            Toast.makeText(getActivity(), "Edit successfully", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getActivity(), "Edit failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+    });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,28 +71,50 @@ public class DisplayOrderFragment extends Fragment {
 
         gvDisplayOrder=(GridView)view.findViewById(R.id.gv_display_order);
 
+        fragmentManager=getActivity().getSupportFragmentManager();
+
         showOrder();
         gvDisplayOrder.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(), AmountMenuActivity.class);
-                intent.putExtra("orderId", listOrder.get(position).getOrder_id());
-                startActivity(intent);
+//                Intent intent=new Intent(getActivity(), AmountMenuActivity.class);
+//                intent.putExtra("orderId", listOrder.get(position).getOrder_id());
+//                startActivity(intent);
+
+                int orderId=listOrder.get(position).getOrder_id();
+                String details=listOrder.get(position).getOrder_date()+"\n"+listOrder.get(position).getOrder_status();
+
+                DisplayOrderFragment displayOrderFragment=new DisplayOrderFragment();
+                Bundle bundle=new Bundle();
+                bundle.putInt("orderId", orderId);
+                bundle.putString("orderDetails", details);
+                displayOrderFragment.setArguments(bundle);
+
+                FragmentTransaction transaction=fragmentManager.beginTransaction();
+                transaction.replace(R.id.contentView,displayOrderFragment).addToBackStack("showOrder");
+                transaction.commit();
             }
         });
         setHasOptionsMenu(true);
         registerForContextMenu(gvDisplayOrder);
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN){
-                    getParentFragmentManager().popBackStack("hienthiloai", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
-                return false;
-            }
-        });
 
         return view;
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull @NotNull ContextMenu menu, @NonNull @NotNull View v, @Nullable @org.jetbrains.annotations.Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.edit_context_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        int id=item.getItemId();
+        if (id==R.id.bt_edit){
+            Intent intent=new Intent(getActivity(), AddCategoryActivity.class);
+            resultLauncher.launch(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void showOrder(){
