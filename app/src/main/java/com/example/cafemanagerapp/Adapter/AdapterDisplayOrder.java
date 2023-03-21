@@ -66,7 +66,7 @@ public class AdapterDisplayOrder extends BaseAdapter {
             viewHolder=(ViewHolder)view.getTag();
         }
         Order order=listOrder.get(position);
-        viewHolder.tvOrderId.setText(order.getOrder_id());
+        viewHolder.tvOrderId.setText(String.valueOf(order.getOrder_id()));
         viewHolder.tvOrderDetail.setText(order.getOrder_date()+"\n"+order.getOrder_status());
         return view;
     }

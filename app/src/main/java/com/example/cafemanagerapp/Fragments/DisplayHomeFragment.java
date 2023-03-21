@@ -66,6 +66,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
         txt_displayhome_ViewAllCategory.setOnClickListener(this);
+        txt_displayhome_ViewAllStatistic.setOnClickListener(this);
         return view;
     }
     private void DisplayListCategory(){
