@@ -20,6 +20,4 @@ public interface OrderDetailDAO {
     @Insert
     void insert(OrderDetail orderDetail);
 
-    @Query("select * from orderdetail where order_id like '%' || :or_id || '%'")
-    List<OrderDetail> getQuantityByOrId(int or_id);
 }

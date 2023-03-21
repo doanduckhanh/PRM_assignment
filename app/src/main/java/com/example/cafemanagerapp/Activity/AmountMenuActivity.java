@@ -1,6 +1,7 @@
 package com.example.cafemanagerapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.Entity.OrderDetail;
+import com.example.cafemanagerapp.Fragments.DisplayCategoryFragment;
 import com.example.cafemanagerapp.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -50,12 +52,14 @@ public class AmountMenuActivity extends AppCompatActivity {
                     int total_quantity = old_quantity + new_quantity;
 
                     OrderDetail orderDetail1 = new OrderDetail();
+                    orderDetail1.setOrderdetail_id(orderDetail.getOrderdetail_id());
                     orderDetail1.setOrder_id(order_id);
                     orderDetail1.setFood_id(food_id);
                     orderDetail1.setQuantity(total_quantity);
 
                     AppDatabase.getInstance(AmountMenuActivity.this).orderDetailDAO().update(orderDetail1);
                     Toast.makeText(getApplicationContext(),getResources().getString(R.string.add_sucessful),Toast.LENGTH_SHORT).show();
+
                 }else {
                     //thêm số lượng món nếu chưa chọn món này
                     int quantity = Integer.parseInt(TXTL_amountmenu_Quantity.getEditText().getText().toString());
