@@ -59,14 +59,6 @@ public class AmountMenuActivity extends AppCompatActivity {
                     AppDatabase.getInstance(AmountMenuActivity.this).orderDetailDAO().update(orderDetail1);
                     Toast.makeText(getApplicationContext(),getResources().getString(R.string.add_sucessful),Toast.LENGTH_SHORT).show();
 
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    DisplayCategoryFragment displayCategoryFragment = new DisplayCategoryFragment();
-                    Bundle bDataCategory = new Bundle();
-                    bDataCategory.putInt("maban",table_id);
-                    displayCategoryFragment.setArguments(bDataCategory);
-
-                    transaction.replace(R.id.contentView,displayCategoryFragment).addToBackStack("hienthibanan");
-                    transaction.commit();
                 }else {
                     //thêm số lượng món nếu chưa chọn món này
                     int quantity = Integer.parseInt(TXTL_amountmenu_Quantity.getEditText().getText().toString());
