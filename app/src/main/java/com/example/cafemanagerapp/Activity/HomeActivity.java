@@ -89,14 +89,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(item.getItemId());
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.nav_statistic:
-//                FragmentTransaction tranDisplayStatistic = fragmentManager.beginTransaction();
-//                DisplayStatisticFragment displayStatisticFragment = new DisplayStatisticFragment();
-//                tranDisplayStatistic.replace(R.id.contentView,displayStatisticFragment);
-//                tranDisplayStatistic.commit();
-//                navigationView.setCheckedItem(item.getItemId());
-//                drawerLayout.closeDrawers();
-                break;
+//            case R.id.nav_statistic:
+////                FragmentTransaction tranDisplayStatistic = fragmentManager.beginTransaction();
+////                DisplayStatisticFragment displayStatisticFragment = new DisplayStatisticFragment();
+////                tranDisplayStatistic.replace(R.id.contentView,displayStatisticFragment);
+////                tranDisplayStatistic.commit();
+////                navigationView.setCheckedItem(item.getItemId());
+////                drawerLayout.closeDrawers();
+//                break;
             case R.id.nav_table:
                 FragmentTransaction tranDisplayTable = this.getSupportFragmentManager().beginTransaction();
                 tranDisplayTable.replace(R.id.contentView,new TableFragment());

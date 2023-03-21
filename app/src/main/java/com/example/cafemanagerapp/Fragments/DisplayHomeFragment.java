@@ -90,13 +90,13 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 Intent intent1 = new Intent(getActivity(), AddCategoryActivity.class);
                 startActivity(intent1);
                 break;
-            case R.id.txt_displayhome_ViewAllStatistic:
-                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
-                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
-                tranDisplayStatistic.addToBackStack(null);
-                tranDisplayStatistic.commit();
-                navigationView.setCheckedItem(R.id.nav_statistic);
-                break;
+//            case R.id.txt_displayhome_ViewAllStatistic:
+//                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
+//                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
+//                tranDisplayStatistic.addToBackStack(null);
+//                tranDisplayStatistic.commit();
+//                navigationView.setCheckedItem(R.id.nav_statistic);
+//                break;
             case R.id.layout_displayhome_XemBan:
                 FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayTable.replace(R.id.contentView,new TableFragment());
