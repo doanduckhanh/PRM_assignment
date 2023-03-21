@@ -35,7 +35,7 @@ public class AdapterRecycleViewOrder extends RecyclerView.Adapter<AdapterRecycle
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orderList.get(position);
-        holder.txt_custom_order_id.setText(order.getOrder_id());
+        holder.txt_custom_order_id.setText(String.valueOf(order.getOrder_id()));
     }
 
     @Override
