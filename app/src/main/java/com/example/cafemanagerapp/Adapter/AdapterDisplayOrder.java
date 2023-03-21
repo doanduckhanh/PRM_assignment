@@ -58,7 +58,7 @@ public class AdapterDisplayOrder extends BaseAdapter {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(layout,parent,false);
 
-            viewHolder.btEdit=(Button)view.findViewById(R.id.bt_edit);
+//            viewHolder.btEdit=(Button)view.findViewById(R.id.bt_edit);
             viewHolder.tvOrderId=(TextView)view.findViewById(R.id.tv_order_id);
             viewHolder.tvOrderDetail=(TextView)view.findViewById(R.id.tv_order_detail);
             view.setTag(viewHolder);

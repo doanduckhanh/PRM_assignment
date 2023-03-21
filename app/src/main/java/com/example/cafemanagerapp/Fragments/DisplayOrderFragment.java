@@ -77,9 +77,9 @@ public class DisplayOrderFragment extends Fragment {
         gvDisplayOrder.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent=new Intent(getActivity(), AmountMenuActivity.class);
-//                intent.putExtra("orderId", listOrder.get(position).getOrder_id());
-//                startActivity(intent);
+                Intent intent=new Intent(getActivity(), AmountMenuActivity.class);
+                intent.putExtra("orderId", listOrder.get(position).getOrder_id());
+                startActivity(intent);
 
                 int orderId=listOrder.get(position).getOrder_id();
                 String details=listOrder.get(position).getOrder_date()+"\n"+listOrder.get(position).getOrder_status();
@@ -110,10 +110,10 @@ public class DisplayOrderFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         int id=item.getItemId();
-        if (id==R.id.bt_edit){
-            Intent intent=new Intent(getActivity(), AddCategoryActivity.class);
-            resultLauncher.launch(intent);
-        }
+//        if (id==R.id.bt_edit){
+//            Intent intent=new Intent(getActivity(), AddCategoryActivity.class);
+//            resultLauncher.launch(intent);
+//        }
         return super.onOptionsItemSelected(item);
     }
 
