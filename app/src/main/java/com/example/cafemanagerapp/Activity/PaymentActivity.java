@@ -84,7 +84,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_payment_ThanhToan:
                 TableSeat tableSeat = AppDatabase.getInstance(this).tableDAO().getById(maban);
                 tableSeat.setOr_status(false);
-                AppDatabase.getInstance(this).tableDAO().update(tableSeat);
+                AppDatabase.getInstance(this).tableDAO().delete(tableSeat);
                 Order order = AppDatabase.getInstance(this).orderDAO().getByTableId(maban);
                 order.setOrder_status("true");
                 order.setTotal(String.valueOf(tongtien));
