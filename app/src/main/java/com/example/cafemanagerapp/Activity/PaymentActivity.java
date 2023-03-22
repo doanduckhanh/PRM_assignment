@@ -84,7 +84,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_payment_ThanhToan:
                 TableSeat tableSeat = AppDatabase.getInstance(this).tableDAO().getById(maban);
                 tableSeat.setOr_status(false);
-                AppDatabase.getInstance(this).tableDAO().update(tableSeat);
+                AppDatabase.getInstance(this).tableDAO().delete(tableSeat);
                 Order order = AppDatabase.getInstance(this).orderDAO().getByTableId(maban);
                 order.setOrder_status("true");
                 order.setTotal(String.valueOf(tongtien));
@@ -93,6 +93,8 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 TXT_payment_TongTien.setText("0 VNĐ");
                 Toast.makeText(getApplicationContext(),"Thanh toán thành công!",Toast.LENGTH_SHORT);
                 //Toast.makeText(getApplicationContext(),"Lỗi thanh toán!",Toast.LENGTH_SHORT);
+                Intent intent1 = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.img_payment_backbtn:
                 finish();

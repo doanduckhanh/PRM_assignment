@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.cafemanagerapp.Entity.Order;
 import com.example.cafemanagerapp.Entity.OrderDetail;
 
 import java.util.List;
@@ -19,5 +20,9 @@ public interface OrderDetailDAO {
 
     @Insert
     void insert(OrderDetail orderDetail);
+    @Query("select * from orderdetail where orderdetail_id =:id")
+    List<OrderDetail> getOrderDetailById(int id);
+    @Query("Select * from OrderDetail")
+    List<OrderDetail> getAllOrderDetail();
 
 }

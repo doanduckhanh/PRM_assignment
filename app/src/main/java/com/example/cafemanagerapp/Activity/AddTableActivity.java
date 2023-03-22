@@ -31,7 +31,7 @@ public class AddTableActivity extends AppCompatActivity {
                 if(sTableName != null || sTableName.equals("")){
                     TableSeat tableSeat = new TableSeat();
                     tableSeat.setTable_name(sTableName);
-                    tableSeat.setOr_status(false);
+                    tableSeat.setOr_status(true);
                     //trả về result cho displaytable
                     Intent intent = new Intent();
                     AppDatabase.getInstance(AddTableActivity.this).tableDAO().insert(tableSeat);
