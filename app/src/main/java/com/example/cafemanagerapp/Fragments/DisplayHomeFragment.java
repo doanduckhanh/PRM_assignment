@@ -22,6 +22,7 @@ import com.example.cafemanagerapp.Activity.HomeActivity;
 import com.example.cafemanagerapp.Activity.UserCRUDActivity;
 import com.example.cafemanagerapp.Adapter.AdapterDisplayOrder;
 import com.example.cafemanagerapp.Adapter.AdapterRecycleViewCategory;
+import com.example.cafemanagerapp.Adapter.AdapterRecycleViewOrder;
 import com.example.cafemanagerapp.AppDatabase.AppDatabase;
 import com.example.cafemanagerapp.DAO.CategoryDAO;
 import com.example.cafemanagerapp.Entity.Category;
@@ -37,7 +38,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
     RelativeLayout btn_statistic_home,btn_donhang_home, btn_menu_home, btn_user_home;
     TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
     AdapterRecycleViewCategory adapterRecycleViewCategory;
-
+    AdapterRecycleViewOrder adapterDisplayOrder;
 
     List<Category> categoryList;
     List<Order> orderList;
@@ -65,6 +66,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
         txt_displayhome_ViewAllCategory.setOnClickListener(this);
+        txt_displayhome_ViewAllStatistic.setOnClickListener(this);
         return view;
     }
     private void DisplayListCategory(){
@@ -79,7 +81,9 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         rcv_displayhome_order.setHasFixedSize(true);
         rcv_displayhome_order.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         orderList=AppDatabase.getInstance(thiscontext).orderDAO().getAll();
-
+        adapterDisplayOrder=new AdapterRecycleViewOrder(getActivity(), R.layout.custom_layout_displayorder, orderList);
+        rcv_displayhome_order.setAdapter(adapterDisplayOrder);
+        adapterDisplayOrder.notifyDataSetChanged();
 
     }
     public void onClick(View view){
@@ -90,13 +94,13 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 Intent intent1 = new Intent(getActivity(), AddCategoryActivity.class);
                 startActivity(intent1);
                 break;
-//            case R.id.txt_displayhome_ViewAllStatistic:
-//                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
-//                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
-//                tranDisplayStatistic.addToBackStack(null);
-//                tranDisplayStatistic.commit();
-//                navigationView.setCheckedItem(R.id.nav_statistic);
-//                break;
+            case R.id.txt_displayhome_ViewAllStatistic:
+                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
+                tranDisplayStatistic.addToBackStack(null);
+                tranDisplayStatistic.commit();
+       //         navigationView.setCheckedItem(R.id.nav_statistic);
+                break;
             case R.id.layout_displayhome_XemBan:
                 FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayTable.replace(R.id.contentView,new TableFragment());

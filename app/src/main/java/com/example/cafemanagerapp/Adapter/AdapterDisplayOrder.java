@@ -58,7 +58,7 @@ public class AdapterDisplayOrder extends BaseAdapter {
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(layout,parent,false);
 
-            viewHolder.btEdit=(Button)view.findViewById(R.id.bt_edit);
+//            viewHolder.btEdit=(Button)view.findViewById(R.id.bt_edit);
             viewHolder.tvOrderId=(TextView)view.findViewById(R.id.tv_order_id);
             viewHolder.tvOrderDetail=(TextView)view.findViewById(R.id.tv_order_detail);
             view.setTag(viewHolder);
@@ -66,7 +66,7 @@ public class AdapterDisplayOrder extends BaseAdapter {
             viewHolder=(ViewHolder)view.getTag();
         }
         Order order=listOrder.get(position);
-        viewHolder.tvOrderId.setText(order.getOrder_id());
+        viewHolder.tvOrderId.setText(String.valueOf(order.getOrder_id()));
         viewHolder.tvOrderDetail.setText(order.getOrder_date()+"\n"+order.getOrder_status());
         return view;
     }
