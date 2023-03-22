@@ -27,7 +27,7 @@
                 android:id="@+id/tv_order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order 1"
+                android:text="Order"
                 android:textSize="24sp" />
 
             <TextView

@@ -58,8 +58,8 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_menu_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_XemMenu);
         btn_user_home = (RelativeLayout)view.findViewById(R.id.layout_displayhome_XemNV);
         txt_displayhome_ViewAllCategory = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllCategory);
-//        txt_displayhome_ViewAllStatistic = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllStatistic);
-        txt_displayhome_ViewAllStatistic = null;
+        txt_displayhome_ViewAllStatistic = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllStatistic);
+//        txt_displayhome_ViewAllStatistic = null;
         DisplayListCategory();
         DisplayOrder();
         btn_donhang_home.setOnClickListener(this);
@@ -67,7 +67,7 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
         btn_menu_home.setOnClickListener(this);
         btn_user_home.setOnClickListener(this);
         txt_displayhome_ViewAllCategory.setOnClickListener(this);
-//        txt_displayhome_ViewAllStatistic.setOnClickListener(this);
+        txt_displayhome_ViewAllStatistic.setOnClickListener(this);
         return view;
     }
     private void DisplayListCategory(){
@@ -95,13 +95,13 @@ public class DisplayHomeFragment extends Fragment implements View.OnClickListene
                 Intent intent1 = new Intent(getActivity(), AddCategoryActivity.class);
                 startActivity(intent1);
                 break;
-//            case R.id.txt_displayhome_ViewAllStatistic:
-//                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
-//                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
-//                tranDisplayStatistic.addToBackStack(null);
-//                tranDisplayStatistic.commit();
-//       //         navigationView.setCheckedItem(R.id.nav_statistic);
-//                break;
+            case R.id.txt_displayhome_ViewAllStatistic:
+                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
+                tranDisplayStatistic.replace(R.id.contentView,new DisplayOrderFragment());
+                tranDisplayStatistic.addToBackStack(null);
+                tranDisplayStatistic.commit();
+       //         navigationView.setCheckedItem(R.id.nav_statistic);
+                break;
             case R.id.layout_displayhome_XemBan:
                 FragmentTransaction tranDisplayTable = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayTable.replace(R.id.contentView,new TableFragment());

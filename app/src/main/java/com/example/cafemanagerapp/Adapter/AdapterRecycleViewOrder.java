@@ -43,6 +43,7 @@ public class AdapterRecycleViewOrder extends RecyclerView.Adapter<AdapterRecycle
         orderDetailsList = AppDatabase.getInstance(parent.getContext()).orderDetailDAO().getAllOrderDetail();
         foodList =AppDatabase.getInstance(parent.getContext()).foodDAO().getAllFood();
         tableSeatsList =AppDatabase.getInstance(parent.getContext()).tableDAO().getAll();
+//        orderList=AppDatabase.getInstance(parent.getContext()).orderDAO().getAll();
         return new ViewHolder(view);
     }
 
@@ -60,18 +61,19 @@ public class AdapterRecycleViewOrder extends RecyclerView.Adapter<AdapterRecycle
         for (OrderDetail od:orderDetailsList
              ) {
             if(od.getOrder_id() == order.getOrder_id()){
-                thisListOrderDetail.add(od);
-            }
-        }
-        for (OrderDetail od:thisListOrderDetail
-             ) {
-            for (Food f:foodList
-                 ) {
-                if(od.getFood_id()==f.getFood_id()){
-                    price+= Integer.parseInt(f.getPrice())* od.getQuantity();
+//                thisListOrderDetail.add(od);
+                for (Food f:foodList
+                ) {
+                    if(od.getFood_id()==f.getFood_id()){
+                        price+= Integer.parseInt(f.getPrice())* od.getQuantity();
+                    }
                 }
             }
         }
+//        for (OrderDetail od:thisListOrderDetail
+//             ) {
+//
+//        }
         holder.txt_custom_order_price.setText(String.valueOf(price)+"VND");
 
     }
